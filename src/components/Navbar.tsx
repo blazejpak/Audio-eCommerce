@@ -1,4 +1,6 @@
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { PiShoppingCart } from "react-icons/pi";
 
@@ -9,10 +11,16 @@ import arrowRight from "../assets/shared/desktop/icon-arrow-right.svg";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState<boolean>(false);
 
   const menuActive = (
-    <nav className="absolute top-[89px] h-fit w-full bg-white">
+    <motion.nav
+      initial={{ x: "-100%", opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      exit={{ x: "-100%", opacity: 0 }}
+      className="absolute top-[89px] h-fit w-full bg-white"
+    >
       <ul className="flex flex-col items-center gap-4">
         <li className="relative z-10 mt-8 flex h-[217px] w-[327px] flex-col   text-black before:absolute before:bottom-0 before:-z-10 before:h-[165px] before:w-full before:bg-[#F1F1F1]">
           <img
@@ -63,7 +71,7 @@ const Navbar = () => {
           </div>
         </li>
       </ul>
-    </nav>
+    </motion.nav>
   );
 
   return (
@@ -74,7 +82,7 @@ const Navbar = () => {
       >
         <GiHamburgerMenu size={20} />
       </div>
-      {active && menuActive}
+      <AnimatePresence>{active && menuActive}</AnimatePresence>
       <h2 className="text-2xl font-bold">audiophile</h2>
       <div className="mr-4">
         <PiShoppingCart size={23} />
