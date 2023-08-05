@@ -3,14 +3,15 @@ import headerMdImg from "../../assets/home/tablet/image-header.jpg";
 import headerLgImg from "../../assets/home/desktop/image-hero.jpg";
 
 import ButtonGold from "../../ui/buttonGold";
+import CategorySection from "./CategorySection";
 
 const Home = () => {
   const buttonHandler = () => {};
 
   return (
     <main>
-      <section className="relative flex flex-col items-center justify-center bg-[#191919] text-white lg:items-start  lg:px-[10%]">
-        <div className="absolute top-[50%] flex translate-y-[-50%] flex-col items-center gap-6  px-[5%] text-center md:w-[380px]  lg:items-start lg:text-left">
+      <section className="relative flex flex-col items-center justify-center bg-[#191919] text-white lg:items-start lg:px-[5%] xl:px-[10%]">
+        <div className="absolute top-[50%] flex translate-y-[-50%] flex-col items-center gap-6  px-[5%] text-center md:w-[380px] md:px-0  lg:items-start lg:text-left">
           <h2 className="text-sm uppercase tracking-[10px] opacity-50 ">
             new product
           </h2>
@@ -39,6 +40,8 @@ const Home = () => {
           src={headerLgImg}
         />
       </section>
+
+      <CategorySection />
     </main>
   );
 };

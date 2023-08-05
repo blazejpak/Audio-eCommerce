@@ -20,9 +20,9 @@ const Navbar = () => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       exit={{ x: "-100%", opacity: 0 }}
-      className="absolute top-[89px] z-10 h-fit w-full bg-white lg:hidden"
+      className="absolute top-[89px] z-20 h-fit w-full  bg-white pb-8 lg:hidden"
     >
-      <ul className="flex flex-col items-center gap-4">
+      <ul className=" flex flex-col items-center gap-4">
         <li className="relative z-10 mt-8 flex h-[217px] w-[327px] flex-col   text-black before:absolute before:bottom-0 before:-z-10 before:h-[165px] before:w-full before:bg-[#F1F1F1]">
           <img
             src={headphonesMenu}
@@ -76,7 +76,7 @@ const Navbar = () => {
   );
 
   return (
-    <header className="relative  flex items-center justify-between border-b-[1px] border-white border-opacity-10 bg-[#191919] text-white lg:px-[10%] ">
+    <header className="relative  flex items-center justify-between  border-b-[1px] border-white border-opacity-10 bg-[#191919] text-white lg:px-[10%]">
       <div
         className="ml-4 lg:hidden"
         onClick={() => setActive((prevState) => !prevState)}
