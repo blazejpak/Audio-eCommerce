@@ -84,7 +84,9 @@ const Navbar = () => {
         <GiHamburgerMenu size={20} />
       </div>
       <AnimatePresence>{active && menuActive}</AnimatePresence>
-      <img src={logo} alt="logo" />
+      <NavLink to="/">
+        <img src={logo} alt="logo" />
+      </NavLink>
       <nav className="hidden lg:block">
         <ul className="flex gap-8 text-sm font-bold uppercase tracking-widest">
           <li>
