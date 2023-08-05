@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 const Root = () => {
   return (
-    <div className="grid grid-rows-[89px_1fr_650px]">
+    <div className="grid grid-rows-[89px_1fr_650px] ">
       <Navbar />
       <Outlet />
       <Footer />

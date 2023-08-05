@@ -19,7 +19,7 @@ const Navbar = () => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       exit={{ x: "-100%", opacity: 0 }}
-      className="absolute top-[89px] h-fit w-full bg-white"
+      className="absolute top-[89px] h-fit w-full bg-white lg:hidden"
     >
       <ul className="flex flex-col items-center gap-4">
         <li className="relative z-10 mt-8 flex h-[217px] w-[327px] flex-col   text-black before:absolute before:bottom-0 before:-z-10 before:h-[165px] before:w-full before:bg-[#F1F1F1]">
@@ -75,17 +75,33 @@ const Navbar = () => {
   );
 
   return (
-    <header className="relative flex items-center justify-between bg-[#191919]  text-white">
+    <header className="relative  flex items-center justify-between border-b-[1px] border-white border-opacity-20 bg-[#191919] text-white lg:px-[10%] ">
       <div
-        className="ml-4"
+        className="ml-4 lg:hidden"
         onClick={() => setActive((prevState) => !prevState)}
       >
         <GiHamburgerMenu size={20} />
       </div>
       <AnimatePresence>{active && menuActive}</AnimatePresence>
       <h2 className="text-2xl font-bold">audiophile</h2>
+      <nav className="hidden lg:block">
+        <ul className="flex gap-8 text-sm font-bold uppercase tracking-widest">
+          <li>
+            <NavLink to="/">home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/">headphones</NavLink>
+          </li>
+          <li>
+            <NavLink to="/">speakers</NavLink>
+          </li>
+          <li>
+            <NavLink to="/">earphones</NavLink>
+          </li>
+        </ul>
+      </nav>
       <div className="mr-4">
-        <PiShoppingCart size={23} />
+        <PiShoppingCart size={24} />
       </div>
     </header>
   );
