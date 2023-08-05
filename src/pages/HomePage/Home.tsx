@@ -1,3 +1,4 @@
+import AdProducts from "./AdProducts";
 import CategorySection from "./CategorySection";
 import HeroSection from "./HeroSection";
 
@@ -6,6 +7,7 @@ const Home = () => {
     <main>
       <HeroSection />
       <CategorySection />
+      <AdProducts />
     </main>
   );
 };
