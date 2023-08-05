@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { PiShoppingCart } from "react-icons/pi";
+import logo from "../assets/shared/desktop/logo.svg";
 
 import headphonesMenu from "../assets/shared/desktop/image-category-thumbnail-headphones.png";
 import speakersMenu from "../assets/shared/desktop/image-category-thumbnail-speakers.png";
@@ -19,7 +20,7 @@ const Navbar = () => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       exit={{ x: "-100%", opacity: 0 }}
-      className="absolute top-[89px] h-fit w-full bg-white lg:hidden"
+      className="absolute top-[89px] z-10 h-fit w-full bg-white lg:hidden"
     >
       <ul className="flex flex-col items-center gap-4">
         <li className="relative z-10 mt-8 flex h-[217px] w-[327px] flex-col   text-black before:absolute before:bottom-0 before:-z-10 before:h-[165px] before:w-full before:bg-[#F1F1F1]">
@@ -83,7 +84,7 @@ const Navbar = () => {
         <GiHamburgerMenu size={20} />
       </div>
       <AnimatePresence>{active && menuActive}</AnimatePresence>
-      <h2 className="text-2xl font-bold">audiophile</h2>
+      <img src={logo} alt="logo" />
       <nav className="hidden lg:block">
         <ul className="flex gap-8 text-sm font-bold uppercase tracking-widest">
           <li>
