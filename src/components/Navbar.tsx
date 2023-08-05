@@ -76,7 +76,7 @@ const Navbar = () => {
   );
 
   return (
-    <header className="relative  flex items-center justify-between border-b-[1px] border-white border-opacity-20 bg-[#191919] text-white lg:px-[10%] ">
+    <header className="relative  flex items-center justify-between border-b-[1px] border-white border-opacity-10 bg-[#191919] text-white lg:px-[10%] ">
       <div
         className="ml-4 lg:hidden"
         onClick={() => setActive((prevState) => !prevState)}
