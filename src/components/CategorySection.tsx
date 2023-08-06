@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 
-import headphonesMenu from "../../assets/shared/desktop/image-category-thumbnail-headphones.png";
-import speakersMenu from "../../assets/shared/desktop/image-category-thumbnail-speakers.png";
-import earphonesMenu from "../../assets/shared/desktop/image-category-thumbnail-earphones.png";
-import arrowRight from "../../assets/shared/desktop/icon-arrow-right.svg";
+import headphonesMenu from "../assets/shared/desktop/image-category-thumbnail-headphones.png";
+import speakersMenu from "../assets/shared/desktop/image-category-thumbnail-speakers.png";
+import earphonesMenu from "../assets/shared/desktop/image-category-thumbnail-earphones.png";
+import arrowRight from "../assets/shared/desktop/icon-arrow-right.svg";
 
 const CategorySection = () => {
   return (
@@ -13,7 +13,7 @@ const CategorySection = () => {
           <li>
             <NavLink
               className="group relative z-10 mt-8 flex h-[217px] w-[327px] flex-col text-black   before:absolute before:bottom-0 before:-z-10 before:h-[165px] before:w-full before:bg-[#F1F1F1] md:w-[223px] lg:w-[300px] xl:w-[350px]"
-              to="/"
+              to="/headphones"
             >
               <img
                 src={headphonesMenu}
@@ -36,7 +36,7 @@ const CategorySection = () => {
           <li>
             <NavLink
               className="group relative z-10 mt-8 flex h-[217px] w-[327px] flex-col   text-black before:absolute before:bottom-0 before:-z-10 before:h-[165px] before:w-full before:bg-[#F1F1F1] md:w-[223px] lg:w-[300px] xl:w-[350px]"
-              to="/"
+              to="/speakers"
             >
               <img
                 src={speakersMenu}
@@ -57,7 +57,7 @@ const CategorySection = () => {
           <li>
             <NavLink
               className="group relative z-10 mt-8 flex h-[217px] w-[327px] flex-col   text-black before:absolute before:bottom-0 before:-z-10 before:h-[165px] before:w-full before:bg-[#F1F1F1] md:w-[223px] lg:w-[300px] xl:w-[350px]"
-              to="/"
+              to="/earphones"
             >
               <img
                 src={earphonesMenu}

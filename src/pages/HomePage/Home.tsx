@@ -1,8 +1,8 @@
 import { useAppSelector } from "../../store/hooks";
 import AdProducts from "./AdProducts";
-import CategorySection from "./CategorySection";
+import CategorySection from "../../components/CategorySection";
 import HeroSection from "./HeroSection";
-import InfoSection from "./InfoSection";
+import InfoSection from "../../components/InfoSection";
 
 const Home = () => {
   const isMenuActive = useAppSelector(
@@ -10,7 +10,11 @@ const Home = () => {
   );
 
   return (
-    <main className={`${isMenuActive ? "bg-black/20 brightness-[.2]" : ""}`}>
+    <main
+      className={`${
+        isMenuActive ? "bg-black/20 brightness-[.2]" : " bg-[#FAFAFA]"
+      }`}
+    >
       <HeroSection />
       <CategorySection />
       <AdProducts />

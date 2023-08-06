@@ -8,16 +8,26 @@ import headphonesMenu from "../assets/shared/desktop/image-category-thumbnail-he
 import speakersMenu from "../assets/shared/desktop/image-category-thumbnail-speakers.png";
 import earphonesMenu from "../assets/shared/desktop/image-category-thumbnail-earphones.png";
 import arrowRight from "../assets/shared/desktop/icon-arrow-right.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useEffect } from "react";
 
 const Navbar = () => {
+  const location = useLocation().pathname;
+
   const dispatch = useAppDispatch();
 
-  const isActive = useAppSelector((state) => state.activePageSlice.active);
   const isMenuActive = useAppSelector(
     (state) => state.activePageSlice.menuActive,
   );
+
+  useEffect(() => {
+    const changedLocation = () => {
+      if (isMenuActive) dispatch({ type: "activePage/menuActive" });
+      else return;
+    };
+    changedLocation();
+  }, [location]);
 
   const menuActive = (
     <motion.nav
@@ -36,7 +46,7 @@ const Navbar = () => {
           />
           <div className="flex flex-col items-center gap-4">
             <h3 className="font-bold uppercase tracking-wider">headphones</h3>
-            <NavLink className="flex items-center gap-3 " to="/">
+            <NavLink className="flex items-center gap-3 " to="/headphones">
               <span className="font-bold uppercase tracking-wider opacity-50">
                 shop
               </span>
@@ -52,7 +62,7 @@ const Navbar = () => {
           />
           <div className="flex flex-col items-center gap-4">
             <h3 className="font-bold uppercase tracking-wider">speakers</h3>
-            <NavLink className="flex items-center gap-3 " to="/">
+            <NavLink className="flex items-center gap-3 " to="/speakers">
               <span className="font-bold uppercase tracking-wider opacity-50">
                 shop
               </span>
@@ -68,7 +78,7 @@ const Navbar = () => {
           />
           <div className="flex flex-col items-center gap-4">
             <h3 className="font-bold uppercase tracking-wider">earphones</h3>
-            <NavLink className="flex items-center gap-3 " to="/">
+            <NavLink className="flex items-center gap-3 " to="/earphones">
               <span className="font-bold uppercase tracking-wider opacity-50">
                 shop
               </span>
@@ -96,7 +106,7 @@ const Navbar = () => {
         <ul className="flex gap-8 text-sm font-bold uppercase tracking-widest">
           <li
             className={`p-2 transition-colors hover:bg-gold-dark ${
-              isActive === "home" ? " bg-gold-dark" : ""
+              location === "/" ? " bg-gold-dark" : ""
             }`}
           >
             <NavLink
@@ -110,11 +120,11 @@ const Navbar = () => {
           </li>
           <li
             className={`p-2 transition-colors hover:bg-gold-dark ${
-              isActive === "headphones" ? "bg-gold-dark" : ""
+              location === "/headphones" ? "bg-gold-dark" : ""
             }`}
           >
             <NavLink
-              to="/"
+              to="/headphones"
               onClick={() =>
                 dispatch({ type: "activePage/data", payload: "headphones" })
               }
@@ -124,11 +134,11 @@ const Navbar = () => {
           </li>
           <li
             className={`p-2 transition-colors hover:bg-gold-dark ${
-              isActive === "speakers" ? "bg-gold-dark" : ""
+              location === "/speakers" ? "bg-gold-dark" : ""
             }`}
           >
             <NavLink
-              to="/"
+              to="/speakers"
               onClick={() =>
                 dispatch({ type: "activePage/data", payload: "speakers" })
               }
@@ -138,11 +148,11 @@ const Navbar = () => {
           </li>
           <li
             className={`p-2 transition-colors hover:bg-gold-dark ${
-              isActive === "earphones" ? "bg-gold-dark" : ""
+              location === "/earphones" ? "bg-gold-dark" : ""
             }`}
           >
             <NavLink
-              to="/"
+              to="/earphones"
               onClick={() =>
                 dispatch({ type: "activePage/data", payload: "earphones" })
               }

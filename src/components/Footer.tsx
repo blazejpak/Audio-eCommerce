@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-center gap-12 bg-black-lighter px-[5%] pt-12 text-white md:items-start xl:px-[10%]">
+    <footer className="flex flex-col items-center gap-12 bg-[#191919] px-[5%] pt-12 text-white md:items-start xl:px-[10%]">
       <div className="flex flex-col items-center gap-12 md:items-start lg:w-full lg:flex-row lg:justify-between">
         <NavLink to="/">
           <img src={logo} alt="logo" />
@@ -21,13 +21,13 @@ const Footer = () => {
               <NavLink to="/">home</NavLink>
             </li>
             <li className="p-1 transition-colors hover:text-gold-dark">
-              <NavLink to="/">headphones</NavLink>
+              <NavLink to="/headphones">headphones</NavLink>
             </li>
             <li className="p-1 transition-colors hover:text-gold-dark">
-              <NavLink to="/">speakers</NavLink>
+              <NavLink to="/speakers">speakers</NavLink>
             </li>
             <li className="p-1 transition-colors hover:text-gold-dark">
-              <NavLink to="/">earphones</NavLink>
+              <NavLink to="/earphones">earphones</NavLink>
             </li>
           </ul>
         </nav>
