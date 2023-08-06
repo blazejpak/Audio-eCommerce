@@ -10,9 +10,19 @@ import speakersMenu from "../assets/shared/desktop/image-category-thumbnail-spea
 import earphonesMenu from "../assets/shared/desktop/image-category-thumbnail-earphones.png";
 import arrowRight from "../assets/shared/desktop/icon-arrow-right.svg";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const Navbar = () => {
   const [active, setActive] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
+
+  const isActive = useAppSelector((state) => state.activePageSlice.active);
+
+  console.log(isActive);
+
+  const activeLink = "p-1  bg-gold-dark";
+  const notActiveLink = "p-1 transition-colors hover:bg-gold-dark";
 
   const menuActive = (
     <motion.nav
@@ -89,17 +99,61 @@ const Navbar = () => {
       </NavLink>
       <nav className="hidden lg:block">
         <ul className="flex gap-8 text-sm font-bold uppercase tracking-widest">
-          <li className="p-1 transition-colors hover:bg-gold-dark">
-            <NavLink to="/">home</NavLink>
+          <li
+            className={`p-1 transition-colors hover:bg-gold-dark ${
+              isActive === "home" ? " bg-gold-dark" : ""
+            }`}
+          >
+            <NavLink
+              to="/"
+              onClick={() =>
+                dispatch({ type: "activePage/data", payload: "home" })
+              }
+            >
+              home
+            </NavLink>
           </li>
-          <li className="p-1 transition-colors hover:bg-gold-dark">
-            <NavLink to="/">headphones</NavLink>
+          <li
+            className={`p-1 transition-colors hover:bg-gold-dark ${
+              isActive === "headphones" ? "bg-gold-dark" : ""
+            }`}
+          >
+            <NavLink
+              to="/"
+              onClick={() =>
+                dispatch({ type: "activePage/data", payload: "headphones" })
+              }
+            >
+              headphones
+            </NavLink>
           </li>
-          <li className="p-1 transition-colors hover:bg-gold-dark">
-            <NavLink to="/">speakers</NavLink>
+          <li
+            className={`p-1 transition-colors hover:bg-gold-dark ${
+              isActive === "speakers" ? "bg-gold-dark" : ""
+            }`}
+          >
+            <NavLink
+              to="/"
+              onClick={() =>
+                dispatch({ type: "activePage/data", payload: "speakers" })
+              }
+            >
+              speakers
+            </NavLink>
           </li>
-          <li className="p-1 transition-colors hover:bg-gold-dark">
-            <NavLink to="/">earphones</NavLink>
+          <li
+            className={`p-1 transition-colors hover:bg-gold-dark ${
+              isActive === "earphones" ? "bg-gold-dark" : ""
+            }`}
+          >
+            <NavLink
+              to="/"
+              onClick={() =>
+                dispatch({ type: "activePage/data", payload: "earphones" })
+              }
+            >
+              earphones
+            </NavLink>
           </li>
         </ul>
       </nav>
