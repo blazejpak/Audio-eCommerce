@@ -46,19 +46,31 @@ const Footer = () => {
         </p>
 
         <div className="flex gap-4  lg:translate-y-[-200%]">
-          <a href="https://github.com/blazejpak" className="cursor-pointer">
+          <a
+            href="https://github.com/blazejpak"
+            className="cursor-pointer"
+            aria-label="Facebook link"
+          >
             <AiFillFacebook
               size={24}
               className="transition-colors duration-500 hover:fill-orange-600"
             />
           </a>
-          <a href="https://github.com/blazejpak" className="cursor-pointer">
+          <a
+            href="https://github.com/blazejpak"
+            className="cursor-pointer"
+            aria-label="Twitter link"
+          >
             <AiFillTwitterCircle
               size={24}
               className="transition-colors duration-500 hover:fill-orange-600"
             />
           </a>
-          <a href="https://github.com/blazejpak" className="cursor-pointer">
+          <a
+            href="https://github.com/blazejpak"
+            className="cursor-pointer"
+            aria-label="Instagram link"
+          >
             <AiFillInstagram
               size={24}
               className="transition-colors duration-500 hover:fill-orange-600"

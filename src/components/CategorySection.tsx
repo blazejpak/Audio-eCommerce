@@ -8,7 +8,7 @@ import arrowRight from "../assets/shared/desktop/icon-arrow-right.svg";
 const CategorySection = () => {
   return (
     <section className="lg:mt-10 lg:px-[5%] xl:px-[10%]">
-      <nav className=" z-10 h-fit w-full bg-white pb-8">
+      <nav className=" z-10 h-fit w-full bg-grey-lighter pb-8">
         <ul className="flex flex-col items-center gap-4 md:flex-row md:justify-center ">
           <li>
             <NavLink
