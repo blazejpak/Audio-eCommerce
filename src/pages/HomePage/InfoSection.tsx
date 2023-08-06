@@ -4,7 +4,7 @@ import modelLg from "../../assets/shared/desktop/image-best-gear.jpg";
 
 const InfoSection = () => {
   return (
-    <section className="my-28 flex flex-col  gap-8 px-[5%] lg:mt-10 lg:flex-row-reverse lg:items-center lg:gap-16 xl:px-[10%]">
+    <section className="my-28 flex flex-col  gap-8 px-[5%] lg:mt-10 lg:flex-row-reverse lg:items-center lg:justify-around lg:gap-16 xl:px-[10%]">
       <img
         src={modelSm}
         alt="Model with headphones"
@@ -20,7 +20,7 @@ const InfoSection = () => {
         alt="Model with headphones"
         className="hidden w-[50%] rounded-lg lg:block"
       />
-      <div className="flex flex-col gap-8 text-center lg:text-left">
+      <div className="flex flex-col gap-8 text-center lg:w-[500px] lg:text-left">
         <h2 className="text-3xl font-bold uppercase lg:text-5xl">
           Bringing you the <span className="text-gold-dark">best</span> audio
           gear
