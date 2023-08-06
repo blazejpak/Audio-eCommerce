@@ -89,16 +89,16 @@ const Navbar = () => {
       </NavLink>
       <nav className="hidden lg:block">
         <ul className="flex gap-8 text-sm font-bold uppercase tracking-widest">
-          <li>
+          <li className="p-1 transition-colors hover:bg-gold-dark">
             <NavLink to="/">home</NavLink>
           </li>
-          <li>
+          <li className="p-1 transition-colors hover:bg-gold-dark">
             <NavLink to="/">headphones</NavLink>
           </li>
-          <li>
+          <li className="p-1 transition-colors hover:bg-gold-dark">
             <NavLink to="/">speakers</NavLink>
           </li>
-          <li>
+          <li className="p-1 transition-colors hover:bg-gold-dark">
             <NavLink to="/">earphones</NavLink>
           </li>
         </ul>
