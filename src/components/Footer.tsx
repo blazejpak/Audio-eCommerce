@@ -1,9 +1,11 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/shared/desktop/logo.svg";
 
-import facebook from "../assets/shared/desktop/icon-facebook.svg";
-import twitter from "../assets/shared/desktop/icon-twitter.svg";
-import instagram from "../assets/shared/desktop/icon-instagram.svg";
+import {
+  AiFillFacebook,
+  AiFillTwitterCircle,
+  AiFillInstagram,
+} from "react-icons/ai";
 
 const Footer = () => {
   return (
@@ -43,15 +45,24 @@ const Footer = () => {
           Copyright 2023. All Rights Reserved
         </p>
 
-        <div className="flex gap-4 lg:translate-y-[-200%]">
+        <div className="flex gap-4  lg:translate-y-[-200%]">
           <a href="https://github.com/blazejpak" className="cursor-pointer">
-            <img src={facebook} alt="facebook" />
+            <AiFillFacebook
+              size={24}
+              className="transition-colors duration-500 hover:fill-orange-600"
+            />
           </a>
           <a href="https://github.com/blazejpak" className="cursor-pointer">
-            <img src={twitter} alt="twitter" />
+            <AiFillTwitterCircle
+              size={24}
+              className="transition-colors duration-500 hover:fill-orange-600"
+            />
           </a>
           <a href="https://github.com/blazejpak" className="cursor-pointer">
-            <img src={instagram} alt="instagram" />
+            <AiFillInstagram
+              size={24}
+              className="transition-colors duration-500 hover:fill-orange-600"
+            />
           </a>
         </div>
       </div>

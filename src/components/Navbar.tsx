@@ -1,5 +1,4 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { PiShoppingCart } from "react-icons/pi";
@@ -13,16 +12,12 @@ import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const Navbar = () => {
-  const [active, setActive] = useState<boolean>(false);
-
   const dispatch = useAppDispatch();
 
   const isActive = useAppSelector((state) => state.activePageSlice.active);
-
-  console.log(isActive);
-
-  const activeLink = "p-1  bg-gold-dark";
-  const notActiveLink = "p-1 transition-colors hover:bg-gold-dark";
+  const isMenuActive = useAppSelector(
+    (state) => state.activePageSlice.menuActive,
+  );
 
   const menuActive = (
     <motion.nav
@@ -89,18 +84,18 @@ const Navbar = () => {
     <header className="relative  flex items-center justify-between  border-b-[1px] border-white border-opacity-10 bg-[#191919] text-white lg:px-[10%]">
       <div
         className="ml-4 lg:hidden"
-        onClick={() => setActive((prevState) => !prevState)}
+        onClick={() => dispatch({ type: "activePage/menuActive" })}
       >
         <GiHamburgerMenu size={20} />
       </div>
-      <AnimatePresence>{active && menuActive}</AnimatePresence>
+      <AnimatePresence>{isMenuActive && menuActive}</AnimatePresence>
       <NavLink to="/">
         <img src={logo} alt="logo" />
       </NavLink>
       <nav className="hidden lg:block">
         <ul className="flex gap-8 text-sm font-bold uppercase tracking-widest">
           <li
-            className={`p-1 transition-colors hover:bg-gold-dark ${
+            className={`p-2 transition-colors hover:bg-gold-dark ${
               isActive === "home" ? " bg-gold-dark" : ""
             }`}
           >
@@ -114,7 +109,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li
-            className={`p-1 transition-colors hover:bg-gold-dark ${
+            className={`p-2 transition-colors hover:bg-gold-dark ${
               isActive === "headphones" ? "bg-gold-dark" : ""
             }`}
           >
@@ -128,7 +123,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li
-            className={`p-1 transition-colors hover:bg-gold-dark ${
+            className={`p-2 transition-colors hover:bg-gold-dark ${
               isActive === "speakers" ? "bg-gold-dark" : ""
             }`}
           >
@@ -142,7 +137,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li
-            className={`p-1 transition-colors hover:bg-gold-dark ${
+            className={`p-2 transition-colors hover:bg-gold-dark ${
               isActive === "earphones" ? "bg-gold-dark" : ""
             }`}
           >

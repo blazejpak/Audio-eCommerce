@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ActivePage {
   active: string;
+  menuActive: boolean;
 }
 
 const initialState: ActivePage = {
   active: "home",
+  menuActive: false,
 };
 
 export const activePageSlice = createSlice({
@@ -15,9 +17,12 @@ export const activePageSlice = createSlice({
     data: (state, action: PayloadAction<string>) => {
       state.active = action.payload;
     },
+    menuActive: (state) => {
+      state.menuActive = !state.menuActive;
+    },
   },
 });
 
-export const { data } = activePageSlice.actions;
+export const { data, menuActive } = activePageSlice.actions;
 
 export default activePageSlice.reducer;
