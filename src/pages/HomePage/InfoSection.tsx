@@ -21,11 +21,11 @@ const InfoSection = () => {
         className="hidden w-[50%] rounded-lg lg:block"
       />
       <div className="flex flex-col gap-8 text-center lg:text-left">
-        <h2 className="text-3xl font-bold uppercase">
+        <h2 className="text-3xl font-bold uppercase lg:text-5xl">
           Bringing you the <span className="text-gold-dark">best</span> audio
           gear
         </h2>
-        <p className="text-sm font-medium leading-6 opacity-50">
+        <p className="text-sm font-medium leading-6 opacity-50 lg:text-base">
           Located at the heart of New York City, Audiophile is the premier store
           for high end headphones, earphones, speakers, and audio accessories.
           We have a large showroom and luxury demonstration rooms available for
