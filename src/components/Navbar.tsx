@@ -46,7 +46,11 @@ const Navbar = () => {
           />
           <div className="flex flex-col items-center gap-4">
             <h3 className="font-bold uppercase tracking-wider">headphones</h3>
-            <NavLink className="flex items-center gap-3 " to="/headphones">
+            <NavLink
+              className="flex items-center gap-3 "
+              to="/headphones"
+              onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+            >
               <span className="font-bold uppercase tracking-wider opacity-50">
                 shop
               </span>
@@ -62,7 +66,11 @@ const Navbar = () => {
           />
           <div className="flex flex-col items-center gap-4">
             <h3 className="font-bold uppercase tracking-wider">speakers</h3>
-            <NavLink className="flex items-center gap-3 " to="/speakers">
+            <NavLink
+              className="flex items-center gap-3 "
+              to="/speakers"
+              onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+            >
               <span className="font-bold uppercase tracking-wider opacity-50">
                 shop
               </span>
@@ -78,7 +86,11 @@ const Navbar = () => {
           />
           <div className="flex flex-col items-center gap-4">
             <h3 className="font-bold uppercase tracking-wider">earphones</h3>
-            <NavLink className="flex items-center gap-3 " to="/earphones">
+            <NavLink
+              className="flex items-center gap-3 "
+              to="/earphones"
+              onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+            >
               <span className="font-bold uppercase tracking-wider opacity-50">
                 shop
               </span>

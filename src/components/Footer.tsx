@@ -18,16 +18,36 @@ const Footer = () => {
         <nav>
           <ul className="flex flex-col items-center gap-4 text-xs font-bold uppercase tracking-widest md:flex-row ">
             <li className="p-1 transition-colors hover:text-gold-dark">
-              <NavLink to="/">home</NavLink>
+              <NavLink
+                to="/"
+                onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+              >
+                home
+              </NavLink>
             </li>
             <li className="p-1 transition-colors hover:text-gold-dark">
-              <NavLink to="/headphones">headphones</NavLink>
+              <NavLink
+                to="/headphones"
+                onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+              >
+                headphones
+              </NavLink>
             </li>
             <li className="p-1 transition-colors hover:text-gold-dark">
-              <NavLink to="/speakers">speakers</NavLink>
+              <NavLink
+                to="/speakers"
+                onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+              >
+                speakers
+              </NavLink>
             </li>
             <li className="p-1 transition-colors hover:text-gold-dark">
-              <NavLink to="/earphones">earphones</NavLink>
+              <NavLink
+                to="/earphones"
+                onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+              >
+                earphones
+              </NavLink>
             </li>
           </ul>
         </nav>
