@@ -69,7 +69,7 @@ Headphones"
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-8 lg:flex-row lg:gap-32">
+        <div className="flex flex-col items-center justify-center gap-8 lg:flex-row-reverse lg:gap-32">
           <img
             src={xx99ISm}
             alt="XX99 Mark I
