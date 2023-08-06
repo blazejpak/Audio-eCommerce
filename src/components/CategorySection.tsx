@@ -14,6 +14,7 @@ const CategorySection = () => {
             <NavLink
               className="group relative z-10 mt-8 flex h-[217px] w-[327px] flex-col text-black   before:absolute before:bottom-0 before:-z-10 before:h-[165px] before:w-full before:bg-[#F1F1F1] md:w-[223px] lg:w-[300px] xl:w-[350px]"
               to="/headphones"
+              onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
             >
               <img
                 src={headphonesMenu}
@@ -37,6 +38,7 @@ const CategorySection = () => {
             <NavLink
               className="group relative z-10 mt-8 flex h-[217px] w-[327px] flex-col   text-black before:absolute before:bottom-0 before:-z-10 before:h-[165px] before:w-full before:bg-[#F1F1F1] md:w-[223px] lg:w-[300px] xl:w-[350px]"
               to="/speakers"
+              onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
             >
               <img
                 src={speakersMenu}
@@ -58,6 +60,7 @@ const CategorySection = () => {
             <NavLink
               className="group relative z-10 mt-8 flex h-[217px] w-[327px] flex-col   text-black before:absolute before:bottom-0 before:-z-10 before:h-[165px] before:w-full before:bg-[#F1F1F1] md:w-[223px] lg:w-[300px] xl:w-[350px]"
               to="/earphones"
+              onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
             >
               <img
                 src={earphonesMenu}
