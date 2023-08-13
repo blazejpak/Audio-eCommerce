@@ -15,9 +15,15 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route path="/" element={<Home />} />
-      <Route path="/headphones" element={<Headphones />} />
-      <Route path="/speakers" element={<Speakers />} />
-      <Route path="/earphones" element={<Earphones />} />
+      <Route path="headphones" element={<Headphones />}>
+        <Route path=":headphonesId" element={<Headphones />} />
+      </Route>
+      <Route path="speakers" element={<Speakers />}>
+        <Route path=":speakersId" element={<Headphones />} />
+      </Route>
+      <Route path="earphones" element={<Earphones />}>
+        <Route path="earphonesId" element={<Headphones />} />
+      </Route>
     </Route>,
   ),
 );

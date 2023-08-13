@@ -8,6 +8,10 @@ const Home = () => {
   const isMenuActive = useAppSelector(
     (state) => state.activePageSlice.menuActive,
   );
+  const data = useAppSelector((state) => state.dataSlice.data);
+
+  console.log(data);
+  console.log(data.find((item) => item.name === "XX99 Mark I Headphones"));
 
   return (
     <main
