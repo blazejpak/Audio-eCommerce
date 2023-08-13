@@ -11,8 +11,6 @@ const Home = () => {
   const data = useAppSelector((state) => state.dataSlice.data);
 
   console.log(data);
-  console.log(data.find((item) => item.name === "XX99 Mark I Headphones"));
-
   return (
     <main
       className={`${

@@ -1,6 +1,6 @@
-import modelSm from "../assets/shared/mobile/image-best-gear.jpg";
-import modelMd from "../assets/shared/tablet/image-best-gear.jpg";
-import modelLg from "../assets/shared/desktop/image-best-gear.jpg";
+import modelSm from "/assets/shared/mobile/image-best-gear.jpg";
+import modelMd from "/assets/shared/tablet/image-best-gear.jpg";
+import modelLg from "/assets/shared/desktop/image-best-gear.jpg";
 
 const InfoSection = () => {
   return (

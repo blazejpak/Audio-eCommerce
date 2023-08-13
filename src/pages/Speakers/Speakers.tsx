@@ -4,13 +4,13 @@ import CategorySection from "../../components/CategorySection";
 import InfoSection from "../../components/InfoSection";
 import ButtonGold from "../../ui/ButtonGold";
 
-import zx9Sm from "../../assets/product-zx9-speaker/mobile/image-category-page-preview.jpg";
-import zx9Md from "../../assets/product-zx9-speaker/tablet/image-category-page-preview.jpg";
-import zx9Lg from "../../assets/product-zx9-speaker/desktop/image-category-page-preview.jpg";
+import zx9Sm from "/assets/product-zx9-speaker/mobile/image-category-page-preview.jpg";
+import zx9Md from "/assets/product-zx9-speaker/tablet/image-category-page-preview.jpg";
+import zx9Lg from "/assets/product-zx9-speaker/desktop/image-category-page-preview.jpg";
 
-import zx7Sm from "../../assets//product-zx7-speaker/mobile/image-category-page-preview.jpg";
-import zx7Md from "../../assets//product-zx7-speaker/tablet/image-category-page-preview.jpg";
-import zx7Lg from "../../assets//product-zx7-speaker/desktop/image-category-page-preview.jpg";
+import zx7Sm from "/assets//product-zx7-speaker/mobile/image-category-page-preview.jpg";
+import zx7Md from "/assets//product-zx7-speaker/tablet/image-category-page-preview.jpg";
+import zx7Lg from "/assets//product-zx7-speaker/desktop/image-category-page-preview.jpg";
 
 const Speakers = () => {
   const isMenuActive = useAppSelector(

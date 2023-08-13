@@ -1,23 +1,22 @@
 import ButtonBlack from "../../ui/ButtonBlack";
 import ButtonWhite from "../../ui/ButtonWhite";
 
-import zx9SmMenu from "../../assets/home/mobile/image-speaker-zx9.png";
-import zx9MdMenu from "../../assets/home/tablet/image-speaker-zx9.png";
-import zx9LgMenu from "../../assets/home/desktop/image-speaker-zx9.png";
+import zx9SmMenu from "/assets/home/mobile/image-speaker-zx9.png";
+import zx9MdMenu from "/assets/home/tablet/image-speaker-zx9.png";
+import zx9LgMenu from "/assets/home/desktop/image-speaker-zx9.png";
 
-import zx7Sm from "../../assets/home/mobile/image-speaker-zx7.jpg";
-import zx7 from "../../assets/home/desktop/image-speaker-zx7.png";
+import zx7Sm from "/assets/home/mobile/image-speaker-zx7.jpg";
+import zx7 from "/assets/home/desktop/image-speaker-zx7.png";
 
-import yx1Sm from "../../assets/home/mobile/image-earphones-yx1.jpg";
-import yx1Md from "../../assets/home/tablet/image-earphones-yx1.jpg";
-import yx1Lg from "../../assets/home/desktop/image-earphones-yx1.jpg";
+import yx1Sm from "/assets/home/mobile/image-earphones-yx1.jpg";
+import yx1Md from "/assets/home/tablet/image-earphones-yx1.jpg";
+import yx1Lg from "/assets/home/desktop/image-earphones-yx1.jpg";
 
-import circle from "../../assets/home/desktop/pattern-circles.svg";
+import circle from "/assets/home/desktop/pattern-circles.svg";
+import { useNavigate } from "react-router";
 
 const AdProducts = () => {
-  const buttonBlackHandler = () => {};
-
-  const buutonWhiteHandler = () => {};
+  const navigate = useNavigate();
 
   return (
     <section className="flex flex-col gap-8  px-[5%] lg:mt-10 xl:px-[10%]">
@@ -49,7 +48,10 @@ const AdProducts = () => {
             Upgrade to premium speakers that are phenomenally built to deliver
             truly remarkable sound.
           </p>
-          <ButtonBlack text="see product" onClick={buttonBlackHandler} />
+          <ButtonBlack
+            text="see product"
+            onClick={() => navigate("/speakers/zx9-speaker")}
+          />
         </div>
       </div>
 
@@ -70,7 +72,10 @@ const AdProducts = () => {
           <h2 className="text-3xl font-bold uppercase tracking-widest">
             zx7 speaker
           </h2>
-          <ButtonWhite onClick={buutonWhiteHandler} text="see product" />
+          <ButtonWhite
+            onClick={() => navigate("/speakers/zx7-speaker")}
+            text="see product"
+          />
         </div>
       </div>
 
@@ -88,7 +93,10 @@ const AdProducts = () => {
         />
         <div className="flex w-full flex-col items-center gap-8 rounded-lg bg-grey-lighter p-6 md:justify-center">
           <h2 className="text-3xl font-bold uppercase">yx1 earphones</h2>
-          <ButtonWhite onClick={buutonWhiteHandler} text="see product" />
+          <ButtonWhite
+            onClick={() => navigate("/earphones/yx1-earphones")}
+            text="see product"
+          />
         </div>
       </div>
     </section>

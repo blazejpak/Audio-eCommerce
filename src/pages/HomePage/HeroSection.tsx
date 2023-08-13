@@ -1,11 +1,22 @@
-import headerSmImg from "../../assets/home/mobile/image-header.jpg";
-import headerMdImg from "../../assets/home/tablet/image-header.jpg";
-import headerLgImg from "../../assets/home/desktop/image-hero.jpg";
+import headerSmImg from "/assets/home/mobile/image-header.jpg";
+import headerMdImg from "/assets/home/tablet/image-header.jpg";
+import headerLgImg from "/assets/home/desktop/image-hero.jpg";
+
+import { useNavigate } from "react-router";
 
 import ButtonGold from "../../ui/ButtonGold";
+import { useAppSelector } from "../../store/hooks";
 
 const HeroSection = () => {
-  const buttonHandler = () => {};
+  const navigate = useNavigate();
+
+  const dataName = useAppSelector((state) => state.dataSlice.data).find(
+    (item) => item.category === "headphones" && item.new,
+  )?.slug;
+
+  const buttonNavigateHandler = () => {
+    navigate("/headphones/" + dataName);
+  };
 
   return (
     <section className="relative flex flex-col items-center justify-center bg-[#191919] text-white lg:items-start lg:px-[5%] xl:px-[10%]">
@@ -20,7 +31,7 @@ const HeroSection = () => {
           Experience natural, lifelike audio and exceptional build quality made
           for the passionate music enthusiast.
         </p>
-        <ButtonGold onClick={buttonHandler} text="see product" />
+        <ButtonGold onClick={buttonNavigateHandler} text="see product" />
       </div>
       <img
         alt="Image header smartphone - headphones"

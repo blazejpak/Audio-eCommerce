@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 
-import headphonesMenu from "../assets/shared/desktop/image-category-thumbnail-headphones.png";
-import speakersMenu from "../assets/shared/desktop/image-category-thumbnail-speakers.png";
-import earphonesMenu from "../assets/shared/desktop/image-category-thumbnail-earphones.png";
-import arrowRight from "../assets/shared/desktop/icon-arrow-right.svg";
+import headphonesMenu from "/assets/shared/desktop/image-category-thumbnail-headphones.png";
+import speakersMenu from "/assets/shared/desktop/image-category-thumbnail-speakers.png";
+import earphonesMenu from "/assets/shared/desktop/image-category-thumbnail-earphones.png";
+import arrowRight from "/assets/shared/desktop/icon-arrow-right.svg";
 
 const CategorySection = () => {
   return (

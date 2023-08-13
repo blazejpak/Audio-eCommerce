@@ -1,22 +1,33 @@
 import { useAppSelector } from "../../store/hooks";
 
-import xx99ISm from "../../assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview.jpg";
-import xx99IMd from "../../assets/product-xx99-mark-one-headphones/tablet/image-category-page-preview.jpg";
-import xx99ILg from "../../assets/product-xx99-mark-one-headphones/desktop/image-category-page-preview.jpg";
+import xx99ISm from "/assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview.jpg";
+import xx99IMd from "/assets/product-xx99-mark-one-headphones/tablet/image-category-page-preview.jpg";
+import xx99ILg from "/assets/product-xx99-mark-one-headphones/desktop/image-category-page-preview.jpg";
 
-import xx99IISm from "../../assets/product-xx99-mark-two-headphones/mobile/image-category-page-preview.jpg";
-import xx99IIMd from "../../assets/product-xx99-mark-two-headphones/tablet/image-category-page-preview.jpg";
-import xx99IILg from "../../assets/product-xx99-mark-two-headphones/desktop/image-category-page-preview.jpg";
+import xx99IISm from "/assets/product-xx99-mark-two-headphones/mobile/image-category-page-preview.jpg";
+import xx99IIMd from "/assets/product-xx99-mark-two-headphones/tablet/image-category-page-preview.jpg";
+import xx99IILg from "/assets/product-xx99-mark-two-headphones/desktop/image-category-page-preview.jpg";
 
-import xx59Sm from "../../assets/product-xx59-headphones/mobile/image-category-page-preview.jpg";
-import xx59Md from "../../assets/product-xx59-headphones/tablet/image-category-page-preview.jpg";
-import xx59Lg from "../../assets/product-xx59-headphones/desktop/image-category-page-preview.jpg";
+import xx59Sm from "/assets/product-xx59-headphones/mobile/image-category-page-preview.jpg";
+import xx59Md from "/assets/product-xx59-headphones/tablet/image-category-page-preview.jpg";
+import xx59Lg from "/assets/product-xx59-headphones/desktop/image-category-page-preview.jpg";
 
 import ButtonGold from "../../ui/ButtonGold";
 import CategorySection from "../../components/CategorySection";
 import InfoSection from "../../components/InfoSection";
+import { useNavigate } from "react-router";
 
 const Headphones = () => {
+  const navigate = useNavigate();
+
+  const buttonNavigateHandler = () => {
+    navigate("/headphones/" + dataName);
+  };
+
+  const dataName = useAppSelector((state) => state.dataSlice.data).find(
+    (item) => item.category === "headphones" && item.new,
+  )?.slug;
+
   const isMenuActive = useAppSelector(
     (state) => state.activePageSlice.menuActive,
   );
@@ -65,7 +76,7 @@ Headphones"
               It redefines your premium headphone experience by reproducing the
               balanced depth and precision of studio-quality sound.
             </p>
-            <ButtonGold text="see product" onClick={() => {}} />
+            <ButtonGold text="see product" onClick={buttonNavigateHandler} />
           </div>
         </div>
 

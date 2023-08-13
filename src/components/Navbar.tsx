@@ -2,12 +2,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { PiShoppingCart } from "react-icons/pi";
-import logo from "../assets/shared/desktop/logo.svg";
+import logo from "/assets/shared/desktop/logo.svg";
 
-import headphonesMenu from "../assets/shared/desktop/image-category-thumbnail-headphones.png";
-import speakersMenu from "../assets/shared/desktop/image-category-thumbnail-speakers.png";
-import earphonesMenu from "../assets/shared/desktop/image-category-thumbnail-earphones.png";
-import arrowRight from "../assets/shared/desktop/icon-arrow-right.svg";
+import headphonesMenu from "/assets/shared/desktop/image-category-thumbnail-headphones.png";
+import speakersMenu from "/assets/shared/desktop/image-category-thumbnail-speakers.png";
+import earphonesMenu from "/assets/shared/desktop/image-category-thumbnail-earphones.png";
+import arrowRight from "/assets/shared/desktop/icon-arrow-right.svg";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { useEffect } from "react";

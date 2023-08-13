@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import logo from "../assets/shared/desktop/logo.svg";
+import logo from "/assets/shared/desktop/logo.svg";
 
 import {
   AiFillFacebook,
