@@ -23,7 +23,7 @@ export const activePageSlice = createSlice({
       state.menuActive = !state.menuActive;
     },
     cartActive: (state) => {
-      state.menuActive = !state.menuActive;
+      state.cartActive = !state.cartActive;
     },
   },
 });
