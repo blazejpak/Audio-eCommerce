@@ -28,7 +28,7 @@ const Navbar = () => {
   useEffect(() => {
     const changedLocation = () => {
       if (isMenuActive) dispatch({ type: "activePage/menuActive" });
-      else if (isCartActive) dispatch({ type: "activePage/menuActive" });
+      else if (isCartActive) dispatch({ type: "activePage/cartActive" });
       else if (isMenuActive && isCartActive) {
         dispatch({ type: "activePage/menuActive" });
         dispatch({ type: "activePage/cartActive" });
