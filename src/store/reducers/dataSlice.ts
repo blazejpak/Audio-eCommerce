@@ -6,7 +6,7 @@ export interface typeData {
   data: Array<any>;
 }
 
-const initialState = {
+const initialState: typeData = {
   data: data,
 };
 

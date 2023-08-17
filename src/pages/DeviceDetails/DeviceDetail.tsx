@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import ButtonGold from "../../ui/ButtonGold";
 import { useEffect, useState } from "react";
 import CategorySection from "../../components/CategorySection";
@@ -8,8 +8,13 @@ import InfoSection from "../../components/InfoSection";
 const DeviceDetail = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const dispatch = useAppDispatch();
 
   const [amountDevice, setAmountDevice] = useState(1);
+
+  const datas = useAppSelector((state) => state.storeSlice.data);
+
+  console.log(datas);
 
   useEffect(() => {
     setAmountDevice(1);
@@ -22,6 +27,17 @@ const DeviceDetail = () => {
   const plusHandler = () => {
     if (amountDevice === 10) return;
     else setAmountDevice((prevState) => prevState + 1);
+  };
+
+  const sendToStoreHandler = () => {
+    dispatch({
+      type: "store/dispatchData",
+      payload: {
+        amount: amountDevice,
+        name: deviceData.name,
+        price: deviceData.price,
+      },
+    });
   };
 
   const isMenuActive = useAppSelector(
@@ -129,7 +145,7 @@ const DeviceDetail = () => {
                   +
                 </span>
               </div>
-              <ButtonGold onClick={() => {}} text="add to cart" />
+              <ButtonGold onClick={sendToStoreHandler} text="add to cart" />
             </div>
           </div>
         </div>
@@ -149,7 +165,7 @@ const DeviceDetail = () => {
             in the box
           </h2>
           <ul className="flex flex-col gap-2">
-            {deviceData?.includes.map((item, id) => {
+            {deviceData?.includes.map((item: any, id: any) => {
               return (
                 <li className="flex gap-6" key={id}>
                   <p className="text-sm font-bold text-gold-dark">
@@ -225,7 +241,7 @@ const DeviceDetail = () => {
           you may also like
         </h2>
         <div className="flex flex-col gap-14 md:flex-row md:gap-4">
-          {deviceData?.others.map((item, id) => {
+          {deviceData?.others.map((item: any, id: any) => {
             return (
               <div
                 key={id}

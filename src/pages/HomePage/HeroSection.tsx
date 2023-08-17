@@ -16,6 +16,7 @@ const HeroSection = () => {
 
   const buttonNavigateHandler = () => {
     navigate("/headphones/" + dataName);
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   return (
