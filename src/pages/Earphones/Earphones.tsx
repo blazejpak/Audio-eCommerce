@@ -9,13 +9,6 @@ import yx9Md from "/assets/product-yx1-earphones/tablet/image-category-page-prev
 import yx9Lg from "/assets/product-yx1-earphones/desktop/image-category-page-preview.jpg";
 
 const Earphones = () => {
-  const isMenuActive = useAppSelector(
-    (state) => state.activePageSlice.menuActive,
-  );
-  const isCartActive = useAppSelector(
-    (state) => state.activePageSlice.cartActive,
-  );
-
   return (
     <main>
       <section className="flex h-[102px] items-center justify-center bg-[#191919]">

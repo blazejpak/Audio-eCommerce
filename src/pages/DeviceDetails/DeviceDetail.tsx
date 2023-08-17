@@ -4,17 +4,14 @@ import ButtonGold from "../../ui/ButtonGold";
 import { useEffect, useState } from "react";
 import CategorySection from "../../components/CategorySection";
 import InfoSection from "../../components/InfoSection";
+import AmountChanger from "../../ui/AmountChanger";
 
 const DeviceDetail = () => {
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useAppDispatch();
 
-  const [amountDevice, setAmountDevice] = useState(1);
-
-  const datas = useAppSelector((state) => state.storeSlice.data);
-
-  console.log(datas);
+  const [amountDevice, setAmountDevice] = useState<number>(1);
 
   useEffect(() => {
     setAmountDevice(1);
@@ -27,17 +24,6 @@ const DeviceDetail = () => {
   const plusHandler = () => {
     if (amountDevice === 10) return;
     else setAmountDevice((prevState) => prevState + 1);
-  };
-
-  const sendToStoreHandler = () => {
-    dispatch({
-      type: "store/dispatchData",
-      payload: {
-        amount: amountDevice,
-        name: deviceData.name,
-        price: deviceData.price,
-      },
-    });
   };
 
   const isMenuActive = useAppSelector(
@@ -72,6 +58,18 @@ const DeviceDetail = () => {
       navigate("/speakers/" + slug);
       window.scrollTo({ top: 0, behavior: "instant" });
     } else return;
+  };
+
+  const sendToStoreHandler = () => {
+    dispatch({
+      type: "store/dispatchData",
+      payload: {
+        amount: amountDevice,
+        name: deviceData.name,
+        price: deviceData.price,
+        slug: deviceData.slug,
+      },
+    });
   };
 
   return (
@@ -123,28 +121,11 @@ const DeviceDetail = () => {
               })}
             </p>
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-32 items-center justify-around bg-grey-normal px-2">
-                <span
-                  className="cursor-pointer opacity-25"
-                  onClick={minusHandler}
-                >
-                  -
-                </span>
-                <input
-                  //to change!
-                  onChange={() => {}}
-                  //to change!
-                  type="text"
-                  className="w-10 bg-transparent text-center outline-none"
-                  value={amountDevice}
-                />
-                <span
-                  className="cursor-pointer opacity-25"
-                  onClick={plusHandler}
-                >
-                  +
-                </span>
-              </div>
+              <AmountChanger
+                minus={minusHandler}
+                plus={plusHandler}
+                amount={amountDevice}
+              />
               <ButtonGold onClick={sendToStoreHandler} text="add to cart" />
             </div>
           </div>

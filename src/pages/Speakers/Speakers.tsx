@@ -16,13 +16,6 @@ import { useNavigate } from "react-router";
 const Speakers = () => {
   const navigate = useNavigate();
 
-  const isMenuActive = useAppSelector(
-    (state) => state.activePageSlice.menuActive,
-  );
-  const isCartActive = useAppSelector(
-    (state) => state.activePageSlice.cartActive,
-  );
-
   const buttonNavigateZx7Handler = () => {
     navigate("/speakers/zx7-speaker");
     window.scrollTo({ top: 0, behavior: "instant" });

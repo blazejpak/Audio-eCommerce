@@ -39,13 +39,6 @@ const Headphones = () => {
     (item) => item.category === "headphones" && item.new,
   )?.slug;
 
-  const isMenuActive = useAppSelector(
-    (state) => state.activePageSlice.menuActive,
-  );
-  const isCartActive = useAppSelector(
-    (state) => state.activePageSlice.cartActive,
-  );
-
   return (
     <main>
       <section className="flex h-[102px] items-center justify-center bg-[#191919]">

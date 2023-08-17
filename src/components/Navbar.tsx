@@ -11,6 +11,7 @@ import arrowRight from "/assets/shared/desktop/icon-arrow-right.svg";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { useEffect } from "react";
+import Cart from "./Cart";
 
 const Navbar = () => {
   const location = useLocation().pathname;
@@ -25,6 +26,17 @@ const Navbar = () => {
     (state) => state.activePageSlice.cartActive,
   );
 
+  const menuHandler = () => {
+    dispatch({ type: "activePage/menuActive" });
+    if (isCartActive) dispatch({ type: "activePage/cartActive" });
+  };
+
+  const cartHandler = () => {
+    dispatch({ type: "activePage/cartActive" });
+
+    if (isMenuActive) dispatch({ type: "activePage/menuActive" });
+  };
+
   useEffect(() => {
     const changedLocation = () => {
       if (isMenuActive) dispatch({ type: "activePage/menuActive" });
@@ -36,8 +48,6 @@ const Navbar = () => {
     };
     changedLocation();
   }, [location]);
-
-  console.log(isCartActive, isMenuActive);
 
   const menuActive = (
     <motion.nav
@@ -114,10 +124,7 @@ const Navbar = () => {
 
   return (
     <header className="relative  flex items-center justify-between  border-b-[1px] border-white border-opacity-10 bg-[#191919] text-white lg:px-[10%]">
-      <div
-        className="ml-4 lg:hidden"
-        onClick={() => dispatch({ type: "activePage/menuActive" })}
-      >
+      <div className="ml-4 lg:hidden" onClick={menuHandler}>
         <GiHamburgerMenu size={20} />
       </div>
       <AnimatePresence>{isMenuActive && menuActive}</AnimatePresence>
@@ -188,9 +195,10 @@ const Navbar = () => {
         <PiShoppingCart
           size={24}
           className="cursor-pointer transition-colors hover:fill-orange-600"
-          onClick={() => dispatch({ type: "activePage/cartActive" })}
+          onClick={cartHandler}
         />
       </div>
+      <AnimatePresence>{isCartActive && <Cart />}</AnimatePresence>
     </header>
   );
 };
