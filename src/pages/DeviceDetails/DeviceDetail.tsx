@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 import { useAppSelector } from "../../store/hooks";
 import ButtonGold from "../../ui/ButtonGold";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CategorySection from "../../components/CategorySection";
 import InfoSection from "../../components/InfoSection";
 
@@ -10,6 +10,10 @@ const DeviceDetail = () => {
   const params = useParams();
 
   const [amountDevice, setAmountDevice] = useState(1);
+
+  useEffect(() => {
+    setAmountDevice(1);
+  }, [params]);
 
   const minusHandler = () => {
     if (amountDevice === 1) return;
