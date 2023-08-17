@@ -21,13 +21,23 @@ const Navbar = () => {
     (state) => state.activePageSlice.menuActive,
   );
 
+  const isCartActive = useAppSelector(
+    (state) => state.activePageSlice.cartActive,
+  );
+
   useEffect(() => {
     const changedLocation = () => {
       if (isMenuActive) dispatch({ type: "activePage/menuActive" });
-      else return;
+      else if (isCartActive) dispatch({ type: "activePage/menuActive" });
+      else if (isMenuActive && isCartActive) {
+        dispatch({ type: "activePage/menuActive" });
+        dispatch({ type: "activePage/menuActive" });
+      } else return;
     };
     changedLocation();
   }, [location]);
+
+  console.log(isCartActive, isMenuActive);
 
   const menuActive = (
     <motion.nav
@@ -175,7 +185,11 @@ const Navbar = () => {
         </ul>
       </nav>
       <div className="mr-4">
-        <PiShoppingCart size={24} />
+        <PiShoppingCart
+          size={24}
+          className="cursor-pointer transition-colors hover:fill-orange-600"
+          onClick={() => dispatch({ type: "activePage/cartActive" })}
+        />
       </div>
     </header>
   );
