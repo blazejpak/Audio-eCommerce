@@ -31,7 +31,7 @@ const Navbar = () => {
       else if (isCartActive) dispatch({ type: "activePage/menuActive" });
       else if (isMenuActive && isCartActive) {
         dispatch({ type: "activePage/menuActive" });
-        dispatch({ type: "activePage/menuActive" });
+        dispatch({ type: "activePage/cartActive" });
       } else return;
     };
     changedLocation();
