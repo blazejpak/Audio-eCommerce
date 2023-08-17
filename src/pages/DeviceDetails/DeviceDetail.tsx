@@ -5,19 +5,19 @@ import { useState } from "react";
 import CategorySection from "../../components/CategorySection";
 import InfoSection from "../../components/InfoSection";
 
-const HeadphonesDetail = () => {
+const DeviceDetail = () => {
   const navigate = useNavigate();
   const params = useParams();
 
-  const [amountHeadphones, setAmountHeadphones] = useState(1);
+  const [amountDevice, setAmountDevice] = useState(1);
 
   const minusHandler = () => {
-    if (amountHeadphones === 1) return;
-    else setAmountHeadphones((prevState) => prevState - 1);
+    if (amountDevice === 1) return;
+    else setAmountDevice((prevState) => prevState - 1);
   };
   const plusHandler = () => {
-    if (amountHeadphones === 10) return;
-    else setAmountHeadphones((prevState) => prevState + 1);
+    if (amountDevice === 10) return;
+    else setAmountDevice((prevState) => prevState + 1);
   };
 
   const isMenuActive = useAppSelector(
@@ -33,7 +33,7 @@ const HeadphonesDetail = () => {
 
   const data = useAppSelector((state) => state.dataSlice.data);
 
-  const headphoneData = useAppSelector((state) => state.dataSlice.data).find(
+  const deviceData = useAppSelector((state) => state.dataSlice.data).find(
     (data) => data.slug === Object.values(params)[0],
   );
 
@@ -67,26 +67,37 @@ const HeadphonesDetail = () => {
         >
           Go Back
         </p>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 md:flex-row md:justify-between md:gap-10">
           <img
-            src={"../../../" + headphoneData?.image.mobile}
-            alt={headphoneData?.name}
+            src={"../../../" + deviceData?.image.mobile}
+            alt={deviceData?.name}
+            className="md:hidden"
           />
-          <div className="flex flex-col gap-6">
-            {headphoneData?.new && (
+          <img
+            src={"../../../" + deviceData?.image.tablet}
+            alt={deviceData?.name}
+            className="hidden w-[50%] md:block lg:hidden"
+          />
+          <img
+            src={"../../../" + deviceData?.image.desktop}
+            alt={deviceData?.name}
+            className="hidden w-[50%] lg:block"
+          />
+          <div className="flex flex-col gap-6 md:w-[50%]">
+            {deviceData?.new && (
               <h2 className="text-sm uppercase tracking-[10px] text-gold-dark opacity-50">
                 new product
               </h2>
             )}
-            <h1 className="text-4xl font-bold uppercase leading-10 tracking-wider md:text-6xl">
-              {headphoneData?.name}
+            <h1 className="text-4xl font-bold uppercase leading-10 tracking-wider ">
+              {deviceData?.name}
             </h1>
             <p className="text-sm font-medium opacity-50 md:text-base">
-              {headphoneData?.description}
+              {deviceData?.description}
             </p>
             <p className="text-lg font-bold tracking-widest">
               ${" "}
-              {headphoneData?.price.toLocaleString("en-US", {
+              {deviceData?.price.toLocaleString("en-US", {
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 3,
               })}
@@ -105,7 +116,7 @@ const HeadphonesDetail = () => {
                   //to change!
                   type="text"
                   className="w-10 bg-transparent text-center outline-none"
-                  value={amountHeadphones}
+                  value={amountDevice}
                 />
                 <span
                   className="cursor-pointer opacity-25"
@@ -119,97 +130,98 @@ const HeadphonesDetail = () => {
           </div>
         </div>
       </section>
+      <section className="flex flex-col gap-28 px-[5%] xl:flex-row xl:px-[10%]">
+        <div className="flex flex-col gap-4  xl:w-[70%]">
+          <h2 className="text-2xl font-bold uppercase tracking-tight md:text-3xl">
+            features
+          </h2>
+          <p className="font-medium leading-6 opacity-50">
+            {deviceData?.features}
+          </p>
+        </div>
 
-      <section className="flex flex-col gap-4 px-[5%] xl:px-[10%]">
-        <h2 className="text-2xl font-bold uppercase tracking-tight">
-          features
-        </h2>
-        <p className="font-medium leading-6 opacity-50">
-          {headphoneData?.features}
-        </p>
+        <div className="flex flex-col gap-4 md:flex-row xl:w-[30%] xl:flex-col">
+          <h2 className="text-2xl font-bold uppercase tracking-tight md:w-[50%] md:text-3xl xl:w-full">
+            in the box
+          </h2>
+          <ul className="flex flex-col gap-2">
+            {deviceData?.includes.map((item, id) => {
+              return (
+                <li className="flex gap-6" key={id}>
+                  <p className="text-sm font-bold text-gold-dark">
+                    {item.quantity}x
+                  </p>
+                  <p className="text-sm font-medium opacity-50">{item.item}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </section>
 
-      <section className="flex flex-col gap-4 px-[5%] xl:px-[10%]">
-        <h2 className="text-2xl font-bold uppercase tracking-tight">
-          in the box
-        </h2>
-        <ul className="flex flex-col gap-2">
-          {headphoneData?.includes.map((item, id) => {
-            return (
-              <li className="flex gap-6" key={id}>
-                <p className="text-sm font-bold text-gold-dark">
-                  {item.quantity}x
-                </p>
-                <p className="text-sm font-medium opacity-50">{item.item}</p>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-
-      <section className="flex flex-col gap-4 px-[5%] xl:px-[10%]">
+      <section className="flex flex-col gap-4 px-[5%] md:flex-row xl:justify-center xl:px-[10%]">
         <div className="flex flex-col gap-4">
           <div className="overflow-hidden rounded-lg">
             <img
-              src={"../../../" + headphoneData?.gallery.first.mobile}
-              alt={`Images of ${headphoneData?.name} product`}
+              src={"../../../" + deviceData?.gallery.first.mobile}
+              alt={`Images of ${deviceData?.name} product`}
               className="md:hidden"
             />
             <img
-              src={"../../../" + headphoneData?.gallery.first.tablet}
-              alt={`Images of ${headphoneData?.name} product`}
+              src={"../../../" + deviceData?.gallery.first.tablet}
+              alt={`Images of ${deviceData?.name} product`}
               className="hidden md:block lg:hidden"
             />
             <img
-              src={"../../../" + headphoneData?.gallery.first.desktop}
-              alt={`Images of ${headphoneData?.name} product`}
+              src={"../../../" + deviceData?.gallery.first.desktop}
+              alt={`Images of ${deviceData?.name} product`}
               className="hidden lg:block"
             />
           </div>
 
           <div className="overflow-hidden rounded-lg">
             <img
-              src={"../../../" + headphoneData?.gallery.second.mobile}
-              alt={`Images of ${headphoneData?.name} product`}
+              src={"../../../" + deviceData?.gallery.second.mobile}
+              alt={`Images of ${deviceData?.name} product`}
               className="md:hidden"
             />
             <img
-              src={"../../../" + headphoneData?.gallery.second.tablet}
-              alt={`Images of ${headphoneData?.name} product`}
+              src={"../../../" + deviceData?.gallery.second.tablet}
+              alt={`Images of ${deviceData?.name} product`}
               className="hidden md:block lg:hidden"
             />
             <img
-              src={"../../../" + headphoneData?.gallery.second.desktop}
-              alt={`Images of ${headphoneData?.name} product`}
+              src={"../../../" + deviceData?.gallery.second.desktop}
+              alt={`Images of ${deviceData?.name} product`}
               className="hidden lg:block"
             />
           </div>
         </div>
         <div className="overflow-hidden rounded-lg">
           <img
-            src={"../../../" + headphoneData?.gallery.third.mobile}
-            alt={`Images of ${headphoneData?.name} product`}
+            src={"../../../" + deviceData?.gallery.third.mobile}
+            alt={`Images of ${deviceData?.name} product`}
             className="md:hidden"
           />
           <img
-            src={"../../../" + headphoneData?.gallery.third.tablet}
-            alt={`Images of ${headphoneData?.name} product`}
+            src={"../../../" + deviceData?.gallery.third.tablet}
+            alt={`Images of ${deviceData?.name} product`}
             className="hidden md:block lg:hidden"
           />
           <img
-            src={"../../../" + headphoneData?.gallery.third.desktop}
-            alt={`Images of ${headphoneData?.name} product`}
+            src={"../../../" + deviceData?.gallery.third.desktop}
+            alt={`Images of ${deviceData?.name} product`}
             className="hidden lg:block"
           />
         </div>
       </section>
 
       <section className="flex flex-col gap-8 px-[5%] xl:px-[10%]">
-        <h2 className="text-center text-2xl font-bold uppercase tracking-tight">
+        <h2 className="text-center text-2xl font-bold uppercase tracking-tight md:text-3xl">
           you may also like
         </h2>
-        <div className="flex flex-col gap-14">
-          {headphoneData?.others.map((item, id) => {
+        <div className="flex flex-col gap-14 md:flex-row md:gap-4">
+          {deviceData?.others.map((item, id) => {
             return (
               <div
                 key={id}
@@ -250,4 +262,4 @@ const HeadphonesDetail = () => {
   );
 };
 
-export default HeadphonesDetail;
+export default DeviceDetail;

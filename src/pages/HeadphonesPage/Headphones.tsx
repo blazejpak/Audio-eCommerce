@@ -22,6 +22,17 @@ const Headphones = () => {
 
   const buttonNavigateHandler = () => {
     navigate("/headphones/" + dataName);
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
+  const buttonNavigateMarkIHandler = () => {
+    navigate("/headphones/xx99-mark-one-headphones");
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
+  const buttonNavigateX59Handler = () => {
+    navigate("/headphones/xx59-headphones");
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const dataName = useAppSelector((state) => state.dataSlice.data).find(
@@ -109,7 +120,10 @@ Headphones"
               mixing engineers, and music aficionados alike in studios and on
               the go.
             </p>
-            <ButtonGold text="see product" onClick={() => {}} />
+            <ButtonGold
+              text="see product"
+              onClick={buttonNavigateMarkIHandler}
+            />
           </div>
         </div>
 
@@ -141,7 +155,7 @@ Headphones"
               tastes with the XX59 headphones. The stylish yet durable versatile
               wireless headset is a brilliant companion at home or on the move.
             </p>
-            <ButtonGold text="see product" onClick={() => {}} />
+            <ButtonGold text="see product" onClick={buttonNavigateX59Handler} />
           </div>
         </div>
       </section>

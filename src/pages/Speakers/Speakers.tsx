@@ -11,11 +11,24 @@ import zx9Lg from "/assets/product-zx9-speaker/desktop/image-category-page-previ
 import zx7Sm from "/assets//product-zx7-speaker/mobile/image-category-page-preview.jpg";
 import zx7Md from "/assets//product-zx7-speaker/tablet/image-category-page-preview.jpg";
 import zx7Lg from "/assets//product-zx7-speaker/desktop/image-category-page-preview.jpg";
+import { useNavigate } from "react-router";
 
 const Speakers = () => {
+  const navigate = useNavigate();
+
   const isMenuActive = useAppSelector(
     (state) => state.activePageSlice.menuActive,
   );
+
+  const buttonNavigateZx7Handler = () => {
+    navigate("/speakers/zx7-speaker");
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
+  const buttonNavigateZx9Handler = () => {
+    navigate("/speakers/zx9-speaker");
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
 
   return (
     <main
@@ -62,7 +75,7 @@ SPEAKER"
               connectivity -- creating new possibilities for more pleasing and
               practical audio setups.
             </p>
-            <ButtonGold text="see product" onClick={() => {}} />
+            <ButtonGold text="see product" onClick={buttonNavigateZx9Handler} />
           </div>
         </div>
 
@@ -95,7 +108,7 @@ SPEAKER"
               represents the top of the line powered speakers for home or studio
               use.
             </p>
-            <ButtonGold text="see product" onClick={() => {}} />
+            <ButtonGold text="see product" onClick={buttonNavigateZx7Handler} />
           </div>
         </div>
       </section>
