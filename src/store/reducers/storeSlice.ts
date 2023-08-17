@@ -18,6 +18,12 @@ export const storeSlice = createSlice({
     dispatchData: (state, action: PayloadAction<any>) => {
       state.data = [...state.data, action.payload];
     },
+    updateData: (state, action: PayloadAction<any>) => {
+      state.data = action.payload;
+    },
+    clearData: (state) => {
+      state.data = [];
+    },
   },
 });
 

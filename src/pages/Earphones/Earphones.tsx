@@ -1,5 +1,3 @@
-import { useAppSelector } from "../../store/hooks";
-
 import CategorySection from "../../components/CategorySection";
 import InfoSection from "../../components/InfoSection";
 import ButtonGold from "../../ui/ButtonGold";
@@ -7,8 +5,16 @@ import ButtonGold from "../../ui/ButtonGold";
 import yx9Sm from "/assets/product-yx1-earphones/mobile/image-category-page-preview.jpg";
 import yx9Md from "/assets/product-yx1-earphones/tablet/image-category-page-preview.jpg";
 import yx9Lg from "/assets/product-yx1-earphones/desktop/image-category-page-preview.jpg";
+import { useNavigate } from "react-router";
 
 const Earphones = () => {
+  const navigate = useNavigate();
+
+  const buttonNavigateYx1Handler = () => {
+    navigate("/earphones/yx1-earphones");
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
   return (
     <main>
       <section className="flex h-[102px] items-center justify-center bg-[#191919]">
@@ -50,7 +56,7 @@ EARPHONES"
               sound even in noisy environments with its active noise
               cancellation feature.
             </p>
-            <ButtonGold text="see product" onClick={() => {}} />
+            <ButtonGold text="see product" onClick={buttonNavigateYx1Handler} />
           </div>
         </div>
       </section>

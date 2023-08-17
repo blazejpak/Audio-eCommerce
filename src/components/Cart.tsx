@@ -1,10 +1,11 @@
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { motion } from "framer-motion";
 import ButtonGold from "../ui/ButtonGold";
 import AmountChanger from "../ui/AmountChanger";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Cart = () => {
+  const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.storeSlice.data);
 
   const groupAmount = data.reduce((result, item) => {
@@ -14,6 +15,8 @@ const Cart = () => {
     result[item.name].amount += item.amount;
     return result;
   }, {});
+
+  console.log(data);
 
   const cartData = Object.values(groupAmount);
 
@@ -29,6 +32,7 @@ const Cart = () => {
 
     const filteredData = updatedData.filter((item) => item.amount !== 0);
     setFinalData(filteredData);
+    dispatch({ type: "store/updateData", payload: filteredData });
   };
 
   const plusHandler = (item: any) => {
@@ -39,7 +43,14 @@ const Cart = () => {
       }
       return cartItem;
     });
+
     setFinalData(updatedData);
+    dispatch({ type: "store/updateData", payload: updatedData });
+  };
+
+  const clearData = () => {
+    dispatch({ type: "store/clearData" });
+    setFinalData([]);
   };
 
   const totalPrice = finalData.reduce((acc: number, item: any) => {
@@ -56,8 +67,15 @@ const Cart = () => {
       className="absolute right-[5%] top-[120px] z-20 flex h-[480px] w-80  flex-col gap-10   rounded-lg bg-white p-4 text-black md:w-96"
     >
       <div className="flex justify-between ">
-        <h2>Cart</h2>
-        <p>Remove all</p>
+        <h2 className="text-lg font-bold uppercase">
+          Cart ({finalData.length})
+        </h2>
+        <p
+          className="cursor-pointer underline opacity-50 hover:text-gold-dark active:text-gold-lighter"
+          onClick={clearData}
+        >
+          Remove all
+        </p>
       </div>
       <ul className="flex h-60 flex-col gap-4 overflow-auto">
         {finalData.map((item: any, id) => {
@@ -83,8 +101,8 @@ const Cart = () => {
           );
         })}
       </ul>
-      <div className="flex justify-between">
-        <p>total</p>
+      <div className="flex justify-between font-bold">
+        <p className="uppercase opacity-50">total</p>
         <p>$ {totalPrice}</p>
       </div>
       <div className="self-center">
