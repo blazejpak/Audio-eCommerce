@@ -19,6 +19,9 @@ const Speakers = () => {
   const isMenuActive = useAppSelector(
     (state) => state.activePageSlice.menuActive,
   );
+  const isCartActive = useAppSelector(
+    (state) => state.activePageSlice.cartActive,
+  );
 
   const buttonNavigateZx7Handler = () => {
     navigate("/speakers/zx7-speaker");
@@ -31,11 +34,7 @@ const Speakers = () => {
   };
 
   return (
-    <main
-      className={`${
-        isMenuActive ? "bg-black/20 brightness-[.2]" : "bg-[#FAFAFA]"
-      } `}
-    >
+    <main>
       <section className="flex h-[102px] items-center justify-center bg-[#191919]">
         <h1 className="text-3xl font-bold uppercase tracking-wider text-white">
           speakers
