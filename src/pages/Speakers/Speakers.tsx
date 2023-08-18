@@ -1,5 +1,3 @@
-import { useAppSelector } from "../../store/hooks";
-
 import CategorySection from "../../components/CategorySection";
 import InfoSection from "../../components/InfoSection";
 import ButtonGold from "../../ui/ButtonGold";
@@ -16,12 +14,12 @@ import { useNavigate } from "react-router";
 const Speakers = () => {
   const navigate = useNavigate();
 
-  const buttonNavigateZx7Handler = () => {
+  const buttonNavigateZx7Handler = (): void => {
     navigate("/speakers/zx7-speaker");
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
-  const buttonNavigateZx9Handler = () => {
+  const buttonNavigateZx9Handler = (): void => {
     navigate("/speakers/zx9-speaker");
     window.scrollTo({ top: 0, behavior: "instant" });
   };

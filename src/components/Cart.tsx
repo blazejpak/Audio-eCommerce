@@ -5,6 +5,13 @@ import AmountChanger from "../ui/AmountChanger";
 import { useState } from "react";
 
 const Cart = () => {
+  interface CartData {
+    name: string;
+    amount: number;
+    slug: string;
+    price: number;
+  }
+
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.storeSlice.data);
 
@@ -16,13 +23,11 @@ const Cart = () => {
     return result;
   }, {});
 
-  console.log(data);
-
-  const cartData = Object.values(groupAmount);
+  const cartData: CartData[] = Object.values(groupAmount);
 
   const [finalData, setFinalData] = useState(cartData);
 
-  const minusHandler = (item: any) => {
+  const minusHandler = (item: CartData) => {
     const updatedData = finalData.map((cartItem) => {
       if (cartItem.name === item.name && cartItem.amount > 0) {
         return { ...cartItem, amount: cartItem.amount - 1 };
@@ -35,7 +40,7 @@ const Cart = () => {
     dispatch({ type: "store/updateData", payload: filteredData });
   };
 
-  const plusHandler = (item: any) => {
+  const plusHandler = (item: CartData) => {
     console.log(item);
     const updatedData = finalData.map((cartItem) => {
       if (cartItem.name === item.name && cartItem.amount > 0) {
@@ -53,7 +58,7 @@ const Cart = () => {
     setFinalData([]);
   };
 
-  const totalPrice = finalData.reduce((acc: number, item: any) => {
+  const totalPrice = finalData.reduce((acc: number, item: CartData) => {
     acc += item.price * item.amount;
     return acc;
   }, 0);
@@ -78,7 +83,7 @@ const Cart = () => {
         </p>
       </div>
       <ul className="flex h-60 flex-col gap-4 overflow-auto">
-        {finalData.map((item: any, id) => {
+        {finalData.map((item: CartData, id) => {
           return (
             <li key={id} className="flex items-center justify-between gap-2">
               <img

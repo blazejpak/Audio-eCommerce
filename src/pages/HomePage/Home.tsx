@@ -8,9 +8,7 @@ const Home = () => {
   const isMenuActive = useAppSelector(
     (state) => state.activePageSlice.menuActive,
   );
-  const data = useAppSelector((state) => state.dataSlice.data);
 
-  console.log(data);
   return (
     <main
       className={`${

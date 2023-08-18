@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 const Earphones = () => {
   const navigate = useNavigate();
 
-  const buttonNavigateYx1Handler = () => {
+  const buttonNavigateYx1Handler = ():void => {
     navigate("/earphones/yx1-earphones");
     window.scrollTo({ top: 0, behavior: "instant" });
   };

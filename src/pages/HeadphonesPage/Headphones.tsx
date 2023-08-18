@@ -20,17 +20,17 @@ import { useNavigate } from "react-router";
 const Headphones = () => {
   const navigate = useNavigate();
 
-  const buttonNavigateHandler = () => {
+  const buttonNavigateHandler = (): void => {
     navigate("/headphones/" + dataName);
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
-  const buttonNavigateMarkIHandler = () => {
+  const buttonNavigateMarkIHandler = (): void => {
     navigate("/headphones/xx99-mark-one-headphones");
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
-  const buttonNavigateX59Handler = () => {
+  const buttonNavigateX59Handler = (): void => {
     navigate("/headphones/xx59-headphones");
     window.scrollTo({ top: 0, behavior: "instant" });
   };

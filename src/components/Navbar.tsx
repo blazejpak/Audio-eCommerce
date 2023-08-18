@@ -26,19 +26,19 @@ const Navbar = () => {
     (state) => state.activePageSlice.cartActive,
   );
 
-  const menuHandler = () => {
+  const menuHandler = (): void => {
     dispatch({ type: "activePage/menuActive" });
     if (isCartActive) dispatch({ type: "activePage/cartActive" });
   };
 
-  const cartHandler = () => {
+  const cartHandler = (): void => {
     dispatch({ type: "activePage/cartActive" });
 
     if (isMenuActive) dispatch({ type: "activePage/menuActive" });
   };
 
   useEffect(() => {
-    const changedLocation = () => {
+    const changedLocation = (): void => {
       if (isMenuActive) dispatch({ type: "activePage/menuActive" });
       else if (isCartActive) dispatch({ type: "activePage/cartActive" });
       else if (isMenuActive && isCartActive) {

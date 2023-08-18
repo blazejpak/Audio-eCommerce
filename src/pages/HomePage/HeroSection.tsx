@@ -14,7 +14,7 @@ const HeroSection = () => {
     (item) => item.category === "headphones" && item.new,
   )?.slug;
 
-  const buttonNavigateHandler = () => {
+  const buttonNavigateHandler = (): void => {
     navigate("/headphones/" + dataName);
     window.scrollTo({ top: 0, behavior: "instant" });
   };

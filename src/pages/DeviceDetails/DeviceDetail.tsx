@@ -43,6 +43,8 @@ const DeviceDetail = () => {
     (data) => data.slug === Object.values(params)[0],
   );
 
+  console.log(typeof deviceData);
+
   const productHandler = (slug: string) => {
     if (data.find((item) => item.slug === slug)?.category === "headphones") {
       navigate("/headphones/" + slug);
@@ -146,7 +148,7 @@ const DeviceDetail = () => {
             in the box
           </h2>
           <ul className="flex flex-col gap-2">
-            {deviceData?.includes.map((item: any, id: any) => {
+            {deviceData?.includes.map((item: any, id: number) => {
               return (
                 <li className="flex gap-6" key={id}>
                   <p className="text-sm font-bold text-gold-dark">
