@@ -11,18 +11,43 @@ import Headphones from "./pages/HeadphonesPage/Headphones";
 import Speakers from "./pages/Speakers/Speakers";
 import Earphones from "./pages/Earphones/Earphones";
 import DeviceDetail from "./pages/DeviceDetails/DeviceDetail";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Root />}>
-      <Route path="/" element={<Home />} />
-      <Route path="headphones" element={<Headphones />} />
-      <Route path="headphones/:headphonesId" element={<DeviceDetail />} />
-      <Route path="speakers" element={<Speakers />} />
-      <Route path="speakers/:speakersId" element={<DeviceDetail />} />
+    <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+      <Route path="/" element={<Home />} errorElement={<ErrorPage />} />
+      <Route
+        path="headphones"
+        element={<Headphones />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path="headphones/:headphonesId"
+        element={<DeviceDetail />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path="speakers"
+        element={<Speakers />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path="speakers/:speakersId"
+        element={<DeviceDetail />}
+        errorElement={<ErrorPage />}
+      />
 
-      <Route path="earphones" element={<Earphones />} />
-      <Route path="earphones/:earphonesId" element={<DeviceDetail />} />
+      <Route
+        path="earphones"
+        element={<Earphones />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path="earphones/:earphonesId"
+        element={<DeviceDetail />}
+        errorElement={<ErrorPage />}
+      />
     </Route>,
   ),
 );

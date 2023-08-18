@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import CategorySection from "../../components/CategorySection";
 import InfoSection from "../../components/InfoSection";
 import AmountChanger from "../../ui/AmountChanger";
+import ErrorPage from "../ErrorPage";
 
 const DeviceDetail = () => {
   const navigate = useNavigate();
@@ -71,6 +72,10 @@ const DeviceDetail = () => {
       },
     });
   };
+
+  // ERROR PARAMS
+  if (deviceData === undefined) return <ErrorPage />;
+  // ERROR PARAMS
 
   return (
     <main
