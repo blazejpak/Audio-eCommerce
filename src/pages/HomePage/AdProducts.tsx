@@ -18,6 +18,21 @@ import { useNavigate } from "react-router";
 const AdProducts = () => {
   const navigate = useNavigate();
 
+  const buttonZx9Handler = (): void => {
+    navigate("/speakers/zx9-speaker");
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
+  const buttonZx7Handler = (): void => {
+    navigate("/speakers/zx7-speaker");
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
+  const buttonYx1Handler = (): void => {
+    navigate("/earphones/yx1-earphones");
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
   return (
     <section className="flex flex-col gap-8  px-[5%] lg:mt-10 xl:px-[10%]">
       <div className="flex h-fit w-full flex-col items-center gap-8 overflow-hidden rounded-lg bg-gold-dark  py-14 text-white md:gap-16 lg:flex-row lg:justify-center lg:gap-32">
@@ -48,10 +63,7 @@ const AdProducts = () => {
             Upgrade to premium speakers that are phenomenally built to deliver
             truly remarkable sound.
           </p>
-          <ButtonBlack
-            text="see product"
-            onClick={() => navigate("/speakers/zx9-speaker")}
-          />
+          <ButtonBlack text="see product" onClick={buttonZx9Handler} />
         </div>
       </div>
 
@@ -72,10 +84,7 @@ const AdProducts = () => {
           <h2 className="text-3xl font-bold uppercase tracking-widest">
             zx7 speaker
           </h2>
-          <ButtonWhite
-            onClick={() => navigate("/speakers/zx7-speaker")}
-            text="see product"
-          />
+          <ButtonWhite onClick={buttonZx7Handler} text="see product" />
         </div>
       </div>
 
@@ -93,10 +102,7 @@ const AdProducts = () => {
         />
         <div className="flex w-full flex-col items-center gap-8 rounded-lg bg-grey-lighter p-6 md:justify-center">
           <h2 className="text-3xl font-bold uppercase">yx1 earphones</h2>
-          <ButtonWhite
-            onClick={() => navigate("/earphones/yx1-earphones")}
-            text="see product"
-          />
+          <ButtonWhite onClick={buttonYx1Handler} text="see product" />
         </div>
       </div>
     </section>
