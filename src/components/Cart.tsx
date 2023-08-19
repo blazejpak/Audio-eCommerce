@@ -4,15 +4,20 @@ import ButtonGold from "../ui/ButtonGold";
 import AmountChanger from "../ui/AmountChanger";
 import { useState } from "react";
 
-const Cart = () => {
-  interface CartData {
-    name: string;
-    amount: number;
-    slug: string;
-    price: number;
-  }
+import { PiShoppingCart } from "react-icons/pi";
+import { useNavigate } from "react-router";
 
+interface CartData {
+  name: string;
+  amount: number;
+  slug: string;
+  price: number;
+}
+
+const Cart = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const data = useAppSelector((state) => state.storeSlice.data);
 
   const groupAmount = data.reduce((result, item) => {
@@ -56,6 +61,12 @@ const Cart = () => {
   const clearData = () => {
     dispatch({ type: "store/clearData" });
     setFinalData([]);
+    console.log("clicked");
+  };
+
+  const checkoutHandler = (): void => {
+    navigate("/checkout");
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const totalPrice = finalData.reduce((acc: number, item: CartData) => {
@@ -69,50 +80,64 @@ const Cart = () => {
       animate={{ x: "0%", opacity: 1 }}
       transition={{ duration: 0.5 }}
       exit={{ x: "100%", opacity: 0 }}
-      className="absolute right-[5%] top-[120px] z-20 flex h-[480px] w-80  flex-col gap-10   rounded-lg bg-white p-4 text-black md:w-96"
+      className="absolute right-[5%] top-[120px] z-20  max-h-[480px]  w-80    rounded-lg bg-white p-4 text-black md:w-96"
     >
-      <div className="flex justify-between ">
-        <h2 className="text-lg font-bold uppercase">
-          Cart ({finalData.length})
-        </h2>
-        <p
-          className="cursor-pointer underline opacity-50 hover:text-gold-dark active:text-gold-lighter"
-          onClick={clearData}
-        >
-          Remove all
-        </p>
-      </div>
-      <ul className="flex h-60 flex-col gap-4 overflow-auto">
-        {finalData.map((item: CartData, id) => {
-          return (
-            <li key={id} className="flex items-center justify-between gap-2">
-              <img
-                alt={item.name}
-                src={`/assets/cart/image-${item.slug}.jpg`}
-                className="h-[64px]"
-              />
-              <div className="flex flex-col gap-1">
-                <h2 className="font-bold">
-                  {item.name.replace(/ (Headphones|Speaker|Earphones)/, "")}
-                </h2>
-                <p className="font-bold opacity-50">$ {item.price}</p>
-              </div>
-              <AmountChanger
-                amount={item.amount}
-                minus={() => minusHandler(item)}
-                plus={() => plusHandler(item)}
-              />
-            </li>
-          );
-        })}
-      </ul>
-      <div className="flex justify-between font-bold">
-        <p className="uppercase opacity-50">total</p>
-        <p>$ {totalPrice}</p>
-      </div>
-      <div className="self-center">
-        <ButtonGold text="checkout" onClick={() => {}} />
-      </div>
+      {finalData.length === 0 ? (
+        <div className="flex  items-center justify-between gap-6">
+          <h2 className="text-2xl font-bold uppercase">Cart is empty</h2>
+          <PiShoppingCart size={64} className="fill-gold-dark" />
+        </div>
+      ) : (
+        <div className="flex flex-col gap-10 ">
+          <div className="flex justify-between ">
+            <h2 className="text-lg font-bold uppercase">
+              Cart ({finalData.length})
+            </h2>
+            <p
+              className={`cursor-pointer underline opacity-50 hover:text-gold-dark active:text-gold-lighter 
+            `}
+              onClick={clearData}
+            >
+              Remove all
+            </p>
+          </div>
+          <ul className="flex max-h-60 flex-col gap-4 overflow-auto pr-2">
+            {finalData.map((item: CartData, id) => {
+              return (
+                <li
+                  key={id}
+                  className="flex items-center justify-between gap-2"
+                >
+                  <img
+                    alt={item.name}
+                    src={`/assets/cart/image-${item.slug}.jpg`}
+                    className="h-[64px]"
+                  />
+                  <div className="flex flex-col gap-1">
+                    <h2 className="font-bold">
+                      {item.name.replace(/ (Headphones|Speaker|Earphones)/, "")}
+                    </h2>
+                    <p className="font-bold opacity-50">$ {item.price}</p>
+                  </div>
+                  <AmountChanger
+                    amount={item.amount}
+                    minus={() => minusHandler(item)}
+                    plus={() => plusHandler(item)}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+          <div className="flex justify-between font-bold">
+            <p className="uppercase opacity-50">total</p>
+            <p>$ {totalPrice}</p>
+          </div>
+          <div className={`self-center `}>
+            <ButtonGold text="checkout" onClick={checkoutHandler} />
+            <p>{}</p>
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 };

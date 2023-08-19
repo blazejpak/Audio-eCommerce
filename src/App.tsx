@@ -12,11 +12,17 @@ import Speakers from "./pages/Speakers/Speakers";
 import Earphones from "./pages/Earphones/Earphones";
 import DeviceDetail from "./pages/DeviceDetails/DeviceDetail";
 import ErrorPage from "./pages/ErrorPage";
+import Checkout from "./pages/CheckoutPage/Checkout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
       <Route path="/" element={<Home />} errorElement={<ErrorPage />} />
+      <Route
+        path="/checkout"
+        element={<Checkout />}
+        errorElement={<ErrorPage />}
+      />
       <Route
         path="headphones"
         element={<Headphones />}

@@ -11,7 +11,7 @@ const Root = () => {
     (state) => state.activePageSlice.cartActive,
   );
   return (
-    <div className="grid grid-rows-[89px_1fr_650px] md:grid-rows-[89px_1fr_400px] ">
+    <div className="grid grid-rows-[89px_1fr_650px] overflow-x-hidden md:grid-rows-[89px_1fr_400px]">
       <Navbar />
       <div
         className={`${
