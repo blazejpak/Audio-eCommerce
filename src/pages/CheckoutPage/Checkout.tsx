@@ -1,128 +1,415 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { useAppSelector } from "../../store/hooks";
+import { CartData } from "../../components/Cart";
+import InputCheckout from "../../components/InputCheckout";
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const [typePayment, setTypePayment] = useState("card");
+  const [typePayment, setTypePayment] = useState("cash");
+
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState(false);
+  const [mail, setMail] = useState("");
+  const [mailError, setMailError] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState(false);
+  const [address, setAddress] = useState("");
+  const [addressError, setAddressError] = useState(false);
+  const [code, setCode] = useState("");
+  const [codeError, setCodeError] = useState(false);
+  const [city, setCity] = useState("");
+  const [cityError, setCityError] = useState(false);
+  const [country, setCountry] = useState("");
+  const [countryError, setCountryError] = useState(false);
+  const [eMoney, setEMoney] = useState("");
+  const [eMoneyError, setEMoneyError] = useState(false);
+  const [eCode, setECode] = useState("");
+  const [eCodeError, setECodeError] = useState(false);
+
+  const [submit, setSubmit] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  useEffect(() => {
+    if (!name && submit) setNameError(true);
+    else setNameError(false);
+    if (!mail && submit) setMailError(true);
+    else setMailError(false);
+    if (!phoneNumber && submit) setPhoneNumberError(true);
+    else setPhoneNumberError(false);
+    if (!address && submit) setAddressError(true);
+    else setAddressError(false);
+    if (!code && submit) setCodeError(true);
+    else setCodeError(false);
+    if (!city && submit) setCityError(true);
+    else setCityError(false);
+    if (!country && submit) setCountryError(true);
+    else setCountryError(false);
+    if (!eMoney && submit) setEMoneyError(true);
+    else setEMoneyError(false);
+    if (!eCode && submit) setECodeError(true);
+    else setECodeError(false);
+  }, [name, mail, phoneNumber, address, code, city, country, eMoney, eCode]);
+
+  const formSubmit = (e: any) => {
+    e.preventDefault();
+    console.log("Submit");
+
+    if (
+      name &&
+      mail &&
+      phoneNumber.length === 9 &&
+      address &&
+      code.length >= 5 &&
+      city &&
+      country &&
+      typePayment === "cash"
+    ) {
+      setSubmit(true);
+      setSubmitSuccess(true);
+      console.log("Success!!");
+    } else if (
+      name &&
+      mail &&
+      phoneNumber.length === 9 &&
+      address &&
+      code.length >= 5 &&
+      city &&
+      country &&
+      typePayment === "card" &&
+      eMoney.length === 9 &&
+      eCode.length === 4
+    ) {
+      setSubmit(true);
+      setSubmitSuccess(true);
+      console.log("Success!!");
+    } else {
+      setSubmit(true);
+      setSubmitSuccess(false);
+      console.log();
+    }
+  };
+
+  const cartData = useAppSelector((state) => state.storeSlice.data);
 
   const backHandler = (): void => {
     navigate("/");
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
-  return (
-    <main>
-      <div className="px-[5%] xl:px-[10%]">
-        <p
-          onClick={backHandler}
-          className="mt-4 cursor-pointer hover:text-gold-dark"
-        >
-          Go Back
-        </p>
-      </div>
+  const price = cartData.reduce((acc: number, item: CartData) => {
+    acc += item.price * item.amount;
+    return acc;
+  }, 0);
 
-      <section className="mt-12 flex flex-col gap-8 px-[15%]">
-        <h1 className="text-3xl font-bold uppercase">checkout</h1>
-        <form className="flex flex-col gap-4">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-gold-dark">
-              Billing details
-            </h2>
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-bold">Name</label>
-              <input
+  const priceVat: number = +(price * 0.2).toFixed(0);
+
+  const totalPrice = price + 50;
+
+  useEffect(() => {
+    if (cartData.length === 0)
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+  }, [cartData]);
+
+  if (cartData.length === 0)
+    return (
+      <main className="flex h-screen items-center justify-center px-[5%] xl:px-[10%]">
+        <h1 className="text-4xl font-bold">
+          Cart is empty, you will be relocate to Home Page
+        </h1>
+      </main>
+    );
+  else
+    return (
+      <main className="mb-28 flex flex-col gap-24">
+        <div className="px-[5%] xl:px-[10%]">
+          <p
+            onClick={backHandler}
+            className="mt-4 cursor-pointer hover:text-gold-dark"
+          >
+            Go Back
+          </p>
+        </div>
+
+        <section className="mt-12 flex flex-col gap-8 px-[15%]">
+          <h1 className="text-3xl font-bold uppercase">checkout</h1>
+          <form className="flex flex-col gap-8" onSubmit={formSubmit}>
+            <div className="flex flex-col gap-6">
+              <h2 className="text-sm font-bold uppercase tracking-widest text-gold-dark">
+                Billing details
+              </h2>
+              <InputCheckout
                 type="text"
-                className="h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 outline-none placeholder:opacity-50"
-                placeholder="Błażej Pakuła"
+                placeholder="Jan Kowalski"
+                onChange={(e: any) => {
+                  const input = e.target.value;
+                  let inputName = input.replace(/[^a-zA-Z\s]/g, "");
+
+                  setName(inputName);
+                }}
+                label="Name"
+                value={name}
+                max={30}
+                error={nameError}
               />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-bold">Email Address</label>
-              <input
-                type="text"
-                className="h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 outline-none placeholder:opacity-50"
+              <InputCheckout
+                type="email"
                 placeholder="test@test.com"
+                onChange={(e: any) => {
+                  setMail(e.target.value);
+                }}
+                label="Email Address"
+                value={mail}
+                max={30}
+                error={mailError}
               />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-bold">Phone Number</label>
-              <input
-                type="text"
-                className="h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 outline-none placeholder:opacity-50"
-                placeholder="+48 123 456 789"
-              />
-            </div>
-          </div>
 
-          <div className="flex flex-col gap-6">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-gold-dark">
-              shipping info
-            </h2>
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-bold">Your Address</label>
-              <input
+              <div className="flex flex-col gap-1">
+                <div className="flex justify-between">
+                  <label className="text-xs font-bold" htmlFor="Phone Number">
+                    Phone Number
+                  </label>
+                  {phoneNumberError && <p>Wrong format</p>}
+                </div>
+
+                <input
+                  type="tel"
+                  className="h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 outline-none placeholder:opacity-50"
+                  placeholder="123 456 789"
+                  maxLength={9}
+                  inputMode="numeric"
+                  value={phoneNumber}
+                  id="Phone Number"
+                  onChange={(e: any) => {
+                    const input = e.target.value;
+                    let inputNumber = input.replace(/\D/g, "");
+
+                    setPhoneNumber(inputNumber);
+                  }}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-6">
+              <h2 className="text-sm font-bold uppercase tracking-widest text-gold-dark">
+                shipping info
+              </h2>
+
+              <InputCheckout
                 type="text"
-                className="h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 outline-none placeholder:opacity-50"
                 placeholder="Warszawska 1000"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-bold">ZIP-Code</label>
-              <input
-                type="text"
-                className="h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 outline-none placeholder:opacity-50"
-                placeholder="00-000"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-bold">City</label>
-              <input
-                type="text"
-                className="h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 outline-none placeholder:opacity-50"
-                placeholder="Warszawa"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-bold">Country</label>
-              <input
-                type="text"
-                className="h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 outline-none placeholder:opacity-50"
-                placeholder="Poland"
-              />
-            </div>
-          </div>
+                onChange={(e: any) => {
+                  const input = e.target.value;
 
-          <div className="flex flex-col gap-6">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-gold-dark">
-              payment details
-            </h2>
-            <div className="flex h-14 w-72 items-center gap-4 rounded-lg border border-grey-normal px-6 py-4">
-              <input
-                value="card"
-                type="radio"
-                id="card"
-                onChange={() => setTypePayment("card")}
-                checked={typePayment === "card"}
-                className="form-radio"
+                  setAddress(input);
+                }}
+                label="Your Address"
+                value={address}
+                max={30}
+                error={addressError}
               />
-              <label htmlFor="card">e-Money</label>
-            </div>
-            <div className="flex h-14 w-72 items-center gap-4 rounded-lg border border-grey-normal px-6 py-4 ">
-              <input
-                value="cash"
-                type="radio"
-                id="cash"
-                onChange={() => setTypePayment("cash")}
-                checked={typePayment === "cash"}
-                className="form-radio sr-only"
+
+              <InputCheckout
+                type="text"
+                placeholder="00-000"
+                onChange={(e: any) => {
+                  const input = e.target.value;
+                  let inputNumber = input.replace(/\D/g, "");
+
+                  let formattedCode = "";
+                  for (let i = 0; i < inputNumber.length; i++) {
+                    if (i === 2) formattedCode += "-";
+                    formattedCode += inputNumber[i];
+                  }
+                  setCode(formattedCode);
+                }}
+                label="ZIP-Code"
+                value={code}
+                max={6}
+                error={codeError}
               />
-              <label htmlFor="cash">Cash on Delivery</label>
+
+              <InputCheckout
+                type="text"
+                placeholder="Warszawa"
+                onChange={(e: any) => {
+                  const input = e.target.value;
+                  let inputCity = input.replace(/[^a-zA-Z\s]/g, "");
+
+                  setCity(inputCity);
+                }}
+                label="City"
+                value={city}
+                max={20}
+                error={cityError}
+              />
+
+              <InputCheckout
+                type="text"
+                placeholder="Poland"
+                onChange={(e: any) => {
+                  const input = e.target.value;
+                  let inputCountry = input.replace(/[^a-zA-Z\s]/g, "");
+
+                  setCountry(inputCountry);
+                }}
+                label="Country"
+                value={country}
+                max={20}
+                error={countryError}
+              />
             </div>
-          </div>
-        </form>
-      </section>
-    </main>
-  );
+
+            <div className="flex flex-col gap-6">
+              <h2 className="text-sm font-bold uppercase tracking-widest text-gold-dark">
+                payment details
+              </h2>
+              <div
+                className={`${
+                  typePayment === "card" && "border-gold-dark"
+                } flex h-14 w-72 cursor-pointer  items-center gap-4 rounded-lg border border-grey-normal px-6 py-4 hover:border-gold-dark`}
+                onClick={() => setTypePayment("card")}
+              >
+                <input
+                  readOnly
+                  value="card"
+                  type="radio"
+                  id="card"
+                  checked={typePayment === "card"}
+                  className="  relative h-5 w-5 cursor-pointer appearance-none rounded-full border  text-black before:absolute before:left-[50%] before:top-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:checked:h-[10px] before:checked:w-[10px] before:checked:bg-gold-dark"
+                />
+                <label htmlFor="card" className=" cursor-pointer">
+                  e-Money
+                </label>
+              </div>
+              <div
+                className={`${
+                  typePayment === "cash" && "border-gold-dark"
+                } flex h-14 w-72 cursor-pointer  items-center gap-4 rounded-lg border border-grey-normal px-6 py-4 hover:border-gold-dark`}
+                onClick={() => setTypePayment("cash")}
+              >
+                <input
+                  readOnly
+                  value="cash"
+                  type="radio"
+                  id="cash"
+                  checked={typePayment === "cash"}
+                  className="relative h-5 w-5 cursor-pointer appearance-none rounded-full border  text-black before:absolute before:left-[50%] before:top-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:checked:h-[10px] before:checked:w-[10px] before:checked:bg-gold-dark"
+                />
+                <label htmlFor="cash" className="cursor-pointer">
+                  Cash on Delivery
+                </label>
+              </div>
+
+              {typePayment === "card" && (
+                <div className="flex flex-col gap-4">
+                  <InputCheckout
+                    type="text"
+                    placeholder="123456789"
+                    onChange={(e: any) => {
+                      const input = e.target.value;
+                      let inputEMoney = input.replace(/\D/g, "");
+
+                      setEMoney(inputEMoney);
+                    }}
+                    label="e-Money Number"
+                    value={eMoney}
+                    max={9}
+                    error={eMoneyError}
+                  />
+                  <InputCheckout
+                    type="text"
+                    placeholder="1234"
+                    onChange={(e: any) => {
+                      const input = e.target.value;
+                      let inputECode = input.replace(/\D/g, "");
+
+                      setECode(inputECode);
+                    }}
+                    label="e-Money PIN"
+                    value={eCode}
+                    max={4}
+                    error={eCodeError}
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-8 px-[15%]">
+              <h2 className="text-lg font-bold uppercase tracking-widest">
+                summary
+              </h2>
+              <ul>
+                {cartData.map((item: CartData, id) => {
+                  return (
+                    <li
+                      key={id}
+                      className="flex items-center justify-between gap-2"
+                    >
+                      <div className="flex items-center justify-center gap-4">
+                        <img
+                          alt={item.name}
+                          src={`/assets/cart/image-${item.slug}.jpg`}
+                          className="h-[64px]"
+                        />
+                        <div className="flex flex-col gap-1">
+                          <h2 className="font-bold">
+                            {item.name.replace(
+                              / (Headphones|Speaker|Earphones)/,
+                              "",
+                            )}
+                          </h2>
+                          <p className="font-bold opacity-50">$ {item.price}</p>
+                        </div>
+                      </div>
+                      <p>x{item.amount}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-1">
+                  <div className="flex justify-between">
+                    <h3 className="font-medium uppercase opacity-50">total</h3>
+                    <p className="text-lg font-bold">
+                      $ {new Intl.NumberFormat("en-US").format(price)}
+                    </p>
+                  </div>
+                  <div className="flex justify-between">
+                    <h3 className="font-medium uppercase opacity-50">
+                      shipping
+                    </h3>
+                    <p className="text-lg font-bold">$ 50</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <h3 className="font-medium uppercase opacity-50">
+                      vat (included)
+                    </h3>
+                    <p className="text-lg font-bold">
+                      $ {new Intl.NumberFormat("en-US").format(priceVat)}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <h3 className="font-medium uppercase opacity-50">
+                    grand total
+                  </h3>
+                  <p className="text-lg font-bold text-gold-dark">
+                    $ {new Intl.NumberFormat("en-US").format(totalPrice)}
+                  </p>
+                </div>
+                <button className="flex h-[40px] w-[160px] cursor-pointer items-center justify-center bg-gold-dark text-white transition-all duration-300 hover:bg-gold-lighter active:scale-110">
+                  Continue to pay
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+      </main>
+    );
 };
 
 export default Checkout;

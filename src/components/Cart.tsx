@@ -2,12 +2,12 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { motion } from "framer-motion";
 import ButtonGold from "../ui/ButtonGold";
 import AmountChanger from "../ui/AmountChanger";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { PiShoppingCart } from "react-icons/pi";
 import { useNavigate } from "react-router";
 
-interface CartData {
+export interface CartData {
   name: string;
   amount: number;
   slug: string;
@@ -42,7 +42,6 @@ const Cart = () => {
 
     const filteredData = updatedData.filter((item) => item.amount !== 0);
     setFinalData(filteredData);
-    dispatch({ type: "store/updateData", payload: filteredData });
   };
 
   const plusHandler = (item: CartData) => {
@@ -55,7 +54,6 @@ const Cart = () => {
     });
 
     setFinalData(updatedData);
-    dispatch({ type: "store/updateData", payload: updatedData });
   };
 
   const clearData = () => {
@@ -63,6 +61,11 @@ const Cart = () => {
     setFinalData([]);
     console.log("clicked");
   };
+
+  //Sending final data to store
+  useEffect(() => {
+    dispatch({ type: "store/updateData", payload: finalData });
+  }, [finalData]);
 
   const checkoutHandler = (): void => {
     navigate("/checkout");
