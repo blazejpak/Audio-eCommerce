@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { CartData } from "../../components/Cart";
 import InputCheckout from "../../components/InputCheckout";
-import confirmIcon from "../../../public/assets/checkout/icon-order-confirmation.svg";
 import ButtonGold from "../../ui/ButtonGold";
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [typePayment, setTypePayment] = useState("cash");
 
   const [name, setName] = useState("");
@@ -142,14 +142,18 @@ const Checkout = () => {
     return (
       <main className={`relative flex flex-col  `}>
         {submitSuccess && (
-          <div className="absolute left-[5%] top-[10%] z-10 flex h-[600px] w-80 flex-col gap-4 rounded-lg bg-white p-8">
-            <img src={confirmIcon} alt="Confirm order" className="h-16 w-16" />
+          <div className="absolute left-[50%] top-[10%] z-10 flex h-[600px] w-80 translate-x-[-50%] flex-col gap-4 rounded-lg bg-white p-8  md:h-[480px] md:w-[540px]">
+            <img
+              src="../../../public/assets/checkout/icon-order-confirmation.svg"
+              alt="Confirm order"
+              className="h-16 w-16"
+            />
             <h2 className="text-2xl font-bold uppercase">
               THANK YOU FOR YOUR ORDER
             </h2>
             <p>You will receive an email confirmation shortly.</p>
-            <div>
-              <div className="flex flex-col  gap-4 rounded-t-lg bg-grey-normal px-2 py-6">
+            <div className="flex flex-col md:flex-row">
+              <div className="flex w-full flex-col gap-4 rounded-t-lg bg-grey-normal px-2 py-6 md:w-[60%] md:px-4">
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center justify-between gap-1">
                     <img
@@ -174,13 +178,13 @@ const Checkout = () => {
                 {cartData.length >= 2 && (
                   <div className="flex flex-col gap-4">
                     <div className="h-[1px] w-[90%] bg-black opacity-10"></div>
-                    <p className="font-bold opacity-50">
+                    <p className="text-center font-bold opacity-50">
                       and {cartData.length - 1} other item(s)
                     </p>
                   </div>
                 )}
               </div>
-              <div className="rounded-b-lg bg-black py-4 pl-6 text-white">
+              <div className="flex w-full flex-col items-center justify-center rounded-b-lg bg-black py-4 text-white md:w-[40%] md:py-0">
                 <h3 className="uppercase opacity-50 ">grand total</h3>
                 <p className="text-lg font-bold">
                   $ {new Intl.NumberFormat("en-US").format(totalPrice)}
@@ -192,6 +196,7 @@ const Checkout = () => {
               onClick={() => {
                 navigate("/");
                 window.scrollTo({ top: 0, behavior: "instant" });
+                dispatch({ type: "store/clearData" });
               }}
             />
           </div>
