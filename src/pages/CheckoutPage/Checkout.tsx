@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import { useAppSelector } from "../../store/hooks";
 import { CartData } from "../../components/Cart";
 import InputCheckout from "../../components/InputCheckout";
+import confirmIcon from "../../../public/assets/checkout/icon-order-confirmation.svg";
+import ButtonGold from "../../ui/ButtonGold";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ const Checkout = () => {
   const [eCodeError, setECodeError] = useState(false);
 
   const [submit, setSubmit] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(true);
 
   useEffect(() => {
     if (!name && submit) setNameError(true);
@@ -67,7 +69,15 @@ const Checkout = () => {
     ) {
       setSubmit(true);
       setSubmitSuccess(true);
-      console.log("Success!!");
+      setName("");
+      setMail("");
+      setPhoneNumber("");
+      setAddress("");
+      setCode("");
+      setCity("");
+      setCountry("");
+      setEMoney("");
+      setECode("");
     } else if (
       name &&
       mail &&
@@ -82,11 +92,18 @@ const Checkout = () => {
     ) {
       setSubmit(true);
       setSubmitSuccess(true);
-      console.log("Success!!");
+      setName("");
+      setMail("");
+      setPhoneNumber("");
+      setAddress("");
+      setCode("");
+      setCity("");
+      setCountry("");
+      setEMoney("");
+      setECode("");
     } else {
       setSubmit(true);
       setSubmitSuccess(false);
-      console.log();
     }
   };
 
@@ -123,8 +140,67 @@ const Checkout = () => {
     );
   else
     return (
-      <main className="mb-28 flex flex-col gap-24">
-        <div className="px-[5%] xl:px-[10%]">
+      <main className={`relative flex flex-col  `}>
+        {submitSuccess && (
+          <div className="absolute left-[5%] top-[10%] z-10 flex h-[600px] w-80 flex-col gap-4 rounded-lg bg-white p-8">
+            <img src={confirmIcon} alt="Confirm order" className="h-16 w-16" />
+            <h2 className="text-2xl font-bold uppercase">
+              THANK YOU FOR YOUR ORDER
+            </h2>
+            <p>You will receive an email confirmation shortly.</p>
+            <div>
+              <div className="flex flex-col  gap-4 rounded-t-lg bg-grey-normal px-2 py-6">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center justify-between gap-1">
+                    <img
+                      alt={cartData[0].name}
+                      src={`/assets/cart/image-${cartData[0].slug}.jpg`}
+                      className="h-[64px]"
+                    />
+                    <div className="flex flex-col gap-1">
+                      <h2 className="font-bold">
+                        {cartData[0].name.replace(
+                          / (Headphones|Speaker|Earphones)/,
+                          "",
+                        )}
+                      </h2>
+                      <p className="font-bold opacity-50">
+                        $ {cartData[0].price}
+                      </p>
+                    </div>
+                  </div>
+                  <p>x{cartData[0].amount}</p>
+                </div>
+                {cartData.length >= 2 && (
+                  <div className="flex flex-col gap-4">
+                    <div className="h-[1px] w-[90%] bg-black opacity-10"></div>
+                    <p className="font-bold opacity-50">
+                      and {cartData.length - 1} other item(s)
+                    </p>
+                  </div>
+                )}
+              </div>
+              <div className="rounded-b-lg bg-black py-4 pl-6 text-white">
+                <h3 className="uppercase opacity-50 ">grand total</h3>
+                <p className="text-lg font-bold">
+                  $ {new Intl.NumberFormat("en-US").format(totalPrice)}
+                </p>
+              </div>
+            </div>
+            <ButtonGold
+              text="back to home"
+              onClick={() => {
+                navigate("/");
+                window.scrollTo({ top: 0, behavior: "instant" });
+              }}
+            />
+          </div>
+        )}
+        <div
+          className={`px-[5%] xl:px-[10%] ${
+            submitSuccess && "bg-black/80 brightness-[.2]"
+          }`}
+        >
           <p
             onClick={backHandler}
             className="mt-4 cursor-pointer hover:text-gold-dark"
@@ -133,63 +209,68 @@ const Checkout = () => {
           </p>
         </div>
 
-        <section className="mt-12 flex flex-col gap-8 px-[15%]">
+        <section
+          className={`flex flex-col gap-8 bg-black/80 px-[8%] pb-28 pt-12 lg:px-[15%] ${
+            submitSuccess && "bg-black/80 brightness-[.2]"
+          }`}
+        >
           <h1 className="text-3xl font-bold uppercase">checkout</h1>
-          <form className="flex flex-col gap-8" onSubmit={formSubmit}>
-            <div className="flex flex-col gap-6">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-gold-dark">
+          <form className="flex flex-col gap-8 " onSubmit={formSubmit}>
+            <div className="flex flex-col gap-6 ">
+              <h2 className="flex-nowrap text-sm font-bold uppercase tracking-widest text-gold-dark">
                 Billing details
               </h2>
-              <InputCheckout
-                type="text"
-                placeholder="Jan Kowalski"
-                onChange={(e: any) => {
-                  const input = e.target.value;
-                  let inputName = input.replace(/[^a-zA-Z\s]/g, "");
-
-                  setName(inputName);
-                }}
-                label="Name"
-                value={name}
-                max={30}
-                error={nameError}
-              />
-              <InputCheckout
-                type="email"
-                placeholder="test@test.com"
-                onChange={(e: any) => {
-                  setMail(e.target.value);
-                }}
-                label="Email Address"
-                value={mail}
-                max={30}
-                error={mailError}
-              />
-
-              <div className="flex flex-col gap-1">
-                <div className="flex justify-between">
-                  <label className="text-xs font-bold" htmlFor="Phone Number">
-                    Phone Number
-                  </label>
-                  {phoneNumberError && <p>Wrong format</p>}
-                </div>
-
-                <input
-                  type="tel"
-                  className="h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 outline-none placeholder:opacity-50"
-                  placeholder="123 456 789"
-                  maxLength={9}
-                  inputMode="numeric"
-                  value={phoneNumber}
-                  id="Phone Number"
+              <div className="flex flex-col gap-6  md:flex-row md:flex-wrap md:gap-2">
+                <InputCheckout
+                  type="text"
+                  placeholder="Jan Kowalski"
                   onChange={(e: any) => {
                     const input = e.target.value;
-                    let inputNumber = input.replace(/\D/g, "");
+                    let inputName = input.replace(/[^a-zA-Z\s]/g, "");
 
-                    setPhoneNumber(inputNumber);
+                    setName(inputName);
                   }}
-                  required
+                  label="Name"
+                  value={name}
+                  max={30}
+                  error={nameError}
                 />
+                <InputCheckout
+                  type="email"
+                  placeholder="test@test.com"
+                  onChange={(e: any) => {
+                    setMail(e.target.value);
+                  }}
+                  label="Email Address"
+                  value={mail}
+                  max={30}
+                  error={mailError}
+                />
+                <div className="flex flex-col gap-1">
+                  <div className="flex justify-between">
+                    <label className="text-xs font-bold" htmlFor="Phone Number">
+                      Phone Number
+                    </label>
+                    {phoneNumberError && <p>Wrong format</p>}
+                  </div>
+
+                  <input
+                    type="tel"
+                    className="h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 outline-none placeholder:opacity-50 hover:border-gold-dark focus:border-gold-dark md:w-[310px] md:gap-2"
+                    placeholder="123 456 789"
+                    maxLength={9}
+                    inputMode="numeric"
+                    value={phoneNumber}
+                    id="Phone Number"
+                    onChange={(e: any) => {
+                      const input = e.target.value;
+                      let inputNumber = input.replace(/\D/g, "");
+
+                      setPhoneNumber(inputNumber);
+                    }}
+                    required
+                  />
+                </div>
               </div>
             </div>
 
@@ -198,114 +279,117 @@ const Checkout = () => {
                 shipping info
               </h2>
 
-              <InputCheckout
-                type="text"
-                placeholder="Warszawska 1000"
-                onChange={(e: any) => {
-                  const input = e.target.value;
+              <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:gap-2">
+                <InputCheckout
+                  type="text"
+                  placeholder="Warszawska 1000"
+                  onChange={(e: any) => {
+                    const input = e.target.value;
 
-                  setAddress(input);
-                }}
-                label="Your Address"
-                value={address}
-                max={30}
-                error={addressError}
-              />
+                    setAddress(input);
+                  }}
+                  label="Your Address"
+                  value={address}
+                  max={30}
+                  error={addressError}
+                />
 
-              <InputCheckout
-                type="text"
-                placeholder="00-000"
-                onChange={(e: any) => {
-                  const input = e.target.value;
-                  let inputNumber = input.replace(/\D/g, "");
+                <InputCheckout
+                  type="text"
+                  placeholder="00-000"
+                  onChange={(e: any) => {
+                    const input = e.target.value;
+                    let inputNumber = input.replace(/\D/g, "");
 
-                  let formattedCode = "";
-                  for (let i = 0; i < inputNumber.length; i++) {
-                    if (i === 2) formattedCode += "-";
-                    formattedCode += inputNumber[i];
-                  }
-                  setCode(formattedCode);
-                }}
-                label="ZIP-Code"
-                value={code}
-                max={6}
-                error={codeError}
-              />
+                    let formattedCode = "";
+                    for (let i = 0; i < inputNumber.length; i++) {
+                      if (i === 2) formattedCode += "-";
+                      formattedCode += inputNumber[i];
+                    }
+                    setCode(formattedCode);
+                  }}
+                  label="ZIP-Code"
+                  value={code}
+                  max={6}
+                  error={codeError}
+                />
 
-              <InputCheckout
-                type="text"
-                placeholder="Warszawa"
-                onChange={(e: any) => {
-                  const input = e.target.value;
-                  let inputCity = input.replace(/[^a-zA-Z\s]/g, "");
+                <InputCheckout
+                  type="text"
+                  placeholder="Warszawa"
+                  onChange={(e: any) => {
+                    const input = e.target.value;
+                    let inputCity = input.replace(/[^a-zA-Z\s]/g, "");
 
-                  setCity(inputCity);
-                }}
-                label="City"
-                value={city}
-                max={20}
-                error={cityError}
-              />
+                    setCity(inputCity);
+                  }}
+                  label="City"
+                  value={city}
+                  max={20}
+                  error={cityError}
+                />
 
-              <InputCheckout
-                type="text"
-                placeholder="Poland"
-                onChange={(e: any) => {
-                  const input = e.target.value;
-                  let inputCountry = input.replace(/[^a-zA-Z\s]/g, "");
+                <InputCheckout
+                  type="text"
+                  placeholder="Poland"
+                  onChange={(e: any) => {
+                    const input = e.target.value;
+                    let inputCountry = input.replace(/[^a-zA-Z\s]/g, "");
 
-                  setCountry(inputCountry);
-                }}
-                label="Country"
-                value={country}
-                max={20}
-                error={countryError}
-              />
+                    setCountry(inputCountry);
+                  }}
+                  label="Country"
+                  value={country}
+                  max={20}
+                  error={countryError}
+                />
+              </div>
             </div>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 ">
               <h2 className="text-sm font-bold uppercase tracking-widest text-gold-dark">
                 payment details
               </h2>
-              <div
-                className={`${
-                  typePayment === "card" && "border-gold-dark"
-                } flex h-14 w-72 cursor-pointer  items-center gap-4 rounded-lg border border-grey-normal px-6 py-4 hover:border-gold-dark`}
-                onClick={() => setTypePayment("card")}
-              >
-                <input
-                  readOnly
-                  value="card"
-                  type="radio"
-                  id="card"
-                  checked={typePayment === "card"}
-                  className="  relative h-5 w-5 cursor-pointer appearance-none rounded-full border  text-black before:absolute before:left-[50%] before:top-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:checked:h-[10px] before:checked:w-[10px] before:checked:bg-gold-dark"
-                />
-                <label htmlFor="card" className=" cursor-pointer">
-                  e-Money
-                </label>
+              <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:gap-2">
+                <div
+                  className={`${
+                    typePayment === "card" && "border-gold-dark"
+                  } flex h-14 w-72 cursor-pointer items-center  gap-4 rounded-lg border border-grey-normal px-6 py-4 hover:border-gold-dark md:w-[310px]`}
+                  onClick={() => setTypePayment("card")}
+                >
+                  <input
+                    readOnly
+                    value="card"
+                    type="radio"
+                    id="card"
+                    checked={typePayment === "card"}
+                    className="  relative h-5 w-5 cursor-pointer appearance-none rounded-full border  text-black before:absolute before:left-[50%] before:top-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:checked:h-[10px] before:checked:w-[10px] before:checked:bg-gold-dark"
+                  />
+                  <label htmlFor="card" className=" cursor-pointer">
+                    e-Money
+                  </label>
+                </div>
+                <div
+                  className={`${
+                    typePayment === "cash" && "border-gold-dark"
+                  } flex h-14 w-72 cursor-pointer items-center  gap-4 rounded-lg border border-grey-normal px-6 py-4 hover:border-gold-dark md:w-[310px]`}
+                  onClick={() => setTypePayment("cash")}
+                >
+                  <input
+                    readOnly
+                    value="cash"
+                    type="radio"
+                    id="cash"
+                    checked={typePayment === "cash"}
+                    className="relative h-5 w-5 cursor-pointer appearance-none rounded-full border  text-black before:absolute before:left-[50%] before:top-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:checked:h-[10px] before:checked:w-[10px] before:checked:bg-gold-dark"
+                  />
+                  <label htmlFor="cash" className="cursor-pointer">
+                    Cash on Delivery
+                  </label>
+                </div>
               </div>
-              <div
-                className={`${
-                  typePayment === "cash" && "border-gold-dark"
-                } flex h-14 w-72 cursor-pointer  items-center gap-4 rounded-lg border border-grey-normal px-6 py-4 hover:border-gold-dark`}
-                onClick={() => setTypePayment("cash")}
-              >
-                <input
-                  readOnly
-                  value="cash"
-                  type="radio"
-                  id="cash"
-                  checked={typePayment === "cash"}
-                  className="relative h-5 w-5 cursor-pointer appearance-none rounded-full border  text-black before:absolute before:left-[50%] before:top-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:checked:h-[10px] before:checked:w-[10px] before:checked:bg-gold-dark"
-                />
-                <label htmlFor="cash" className="cursor-pointer">
-                  Cash on Delivery
-                </label>
-              </div>
-
               {typePayment === "card" && (
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:gap-2">
                   <InputCheckout
                     type="text"
                     placeholder="123456789"
@@ -338,7 +422,7 @@ const Checkout = () => {
               )}
             </div>
 
-            <div className="flex flex-col gap-8 px-[15%]">
+            <div className="flex flex-col gap-8">
               <h2 className="text-lg font-bold uppercase tracking-widest">
                 summary
               </h2>
@@ -401,7 +485,7 @@ const Checkout = () => {
                     $ {new Intl.NumberFormat("en-US").format(totalPrice)}
                   </p>
                 </div>
-                <button className="flex h-[40px] w-[160px] cursor-pointer items-center justify-center bg-gold-dark text-white transition-all duration-300 hover:bg-gold-lighter active:scale-110">
+                <button className="flex h-[40px] w-[160px] cursor-pointer items-center justify-center bg-gold-dark text-white transition-all duration-300 hover:bg-gold-lighter active:scale-110 md:w-[100%] md:self-center">
                   Continue to pay
                 </button>
               </div>

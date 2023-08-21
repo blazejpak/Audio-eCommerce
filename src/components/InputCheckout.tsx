@@ -31,7 +31,7 @@ const InputCheckout = ({
         type={type}
         className={`${
           error && "border-red-600"
-        } h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 caret-gold-dark outline-none placeholder:opacity-50`}
+        } h-14 w-72 rounded-lg border border-grey-normal bg-transparent px-6 py-4 caret-gold-dark outline-none placeholder:opacity-50 hover:border-gold-dark focus:border-gold-dark md:w-[310px]`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
