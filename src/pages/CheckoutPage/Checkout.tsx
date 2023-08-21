@@ -30,7 +30,7 @@ const Checkout = () => {
   const [eCodeError, setECodeError] = useState(false);
 
   const [submit, setSubmit] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(true);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   useEffect(() => {
     if (!name && submit) setNameError(true);
