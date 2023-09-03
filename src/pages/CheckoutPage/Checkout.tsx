@@ -32,6 +32,8 @@ const Checkout = () => {
   const [submit, setSubmit] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  console.log(submitSuccess);
+
   useEffect(() => {
     if (!name && submit) setNameError(true);
     else setNameError(false);
@@ -215,7 +217,7 @@ const Checkout = () => {
         </div>
 
         <section
-          className={`flex flex-col gap-8 bg-black/80 px-[8%] pb-28 pt-12 lg:px-[15%] ${
+          className={`flex flex-col gap-8  px-[8%] pb-28 pt-12 lg:px-[15%] ${
             submitSuccess && "bg-black/80 brightness-[.2]"
           }`}
         >
