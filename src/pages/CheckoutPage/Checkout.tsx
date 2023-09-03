@@ -146,7 +146,7 @@ const Checkout = () => {
         {submitSuccess && (
           <div className="absolute left-[50%] top-[10%] z-10 flex h-[600px] w-80 translate-x-[-50%] flex-col gap-4 rounded-lg bg-white p-8  md:h-[480px] md:w-[540px]">
             <img
-              src="../../../public/assets/checkout/icon-order-confirmation.svg"
+              src="./assets/checkout/icon-order-confirmation.svg"
               alt="Confirm order"
               className="h-16 w-16"
             />
