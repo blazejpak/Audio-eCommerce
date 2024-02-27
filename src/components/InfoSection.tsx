@@ -9,16 +9,19 @@ const InfoSection = () => {
         src={modelSm}
         alt="Model with headphones"
         className="rounded-lg md:hidden"
+        height={500}
       />
       <img
         src={modelMd}
         alt="Model with headphones"
         className=" hidden rounded-lg md:block lg:hidden"
+        height={370}
       />
       <img
         src={modelLg}
         alt="Model with headphones"
         className="hidden w-[50%] rounded-lg lg:block"
+        height={600}
       />
       <div className="flex flex-col gap-8 text-center lg:w-[500px] lg:text-left">
         <h2 className="text-3xl font-bold uppercase lg:text-5xl">

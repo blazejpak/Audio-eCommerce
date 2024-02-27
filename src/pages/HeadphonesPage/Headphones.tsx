@@ -54,18 +54,21 @@ const Headphones = () => {
             alt="XX99 Mark II
 Headphones"
             className="rounded-lg md:hidden"
+            height={500}
           />
           <img
             src={xx99IIMd}
             alt="XX99 Mark II
 Headphones"
             className="hidden rounded-lg md:block lg:hidden"
+            height={380}
           />
           <img
             src={xx99IILg}
             alt="XX99 Mark II
 Headphones"
             className="hidden w-[50%] rounded-lg lg:block"
+            height={400}
           />
           <div className="flex flex-col items-center  gap-6 md:w-[570px]">
             <h3 className="text-sm uppercase tracking-[10px] text-gold-dark">
@@ -89,18 +92,21 @@ Headphones"
             alt="XX99 Mark I
 Headphones"
             className="rounded-lg md:hidden"
+            height={650}
           />
           <img
             src={xx99IMd}
             alt="XX99 Mark I
 Headphones"
             className="hidden rounded-lg md:block lg:hidden"
+            height={500}
           />
           <img
             src={xx99ILg}
             alt="XX99 Mark I
 Headphones"
             className="hidden w-[50%] rounded-lg lg:block"
+            height={400}
           />
           <div className="flex flex-col items-center  gap-6 md:w-[570px]">
             <h2 className="text-center text-3xl font-bold uppercase">
@@ -125,18 +131,21 @@ Headphones"
             alt="XX59
 Headphones"
             className="rounded-lg md:hidden"
+            height={650}
           />
           <img
             src={xx59Md}
             alt="XX59
 Headphones"
             className="hidden rounded-lg md:block lg:hidden"
+            height={500}
           />
           <img
             src={xx59Lg}
             alt="XX59
 Headphones"
             className="hidden w-[50%] rounded-lg lg:block"
+            height={400}
           />
           <div className="flex flex-col items-center  gap-6 md:w-[570px]">
             <h2 className="text-center text-3xl font-bold uppercase">

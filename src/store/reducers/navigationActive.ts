@@ -22,8 +22,8 @@ export const activePageSlice = createSlice({
     menuActive: (state) => {
       state.menuActive = !state.menuActive;
     },
-    cartActive: (state) => {
-      state.cartActive = !state.cartActive;
+    cartActive: (state, action) => {
+      state.cartActive = action.payload;
     },
   },
 });

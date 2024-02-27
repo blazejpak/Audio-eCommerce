@@ -38,16 +38,19 @@ const HeroSection = () => {
         alt="Image header smartphone - headphones"
         className="left-0 top-0  w-full md:hidden"
         src={headerSmImg}
+        height={580}
       />
       <img
         alt="Image header tablet - headphones"
         className="left-0 top-0  hidden md:block lg:hidden"
         src={headerMdImg}
+        height={500}
       />
       <img
         alt="Image header desktop - headphones"
         className="left-0 top-0  hidden lg:block"
         src={headerLgImg}
+        height={550}
       />
     </section>
   );

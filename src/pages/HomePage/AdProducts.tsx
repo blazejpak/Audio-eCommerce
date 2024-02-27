@@ -41,17 +41,20 @@ const AdProducts = () => {
             src={circle}
             alt="circle"
             className="absolute left-0 top-4 z-0  scale-[350%] md:scale-[450%] lg:top-[20%] lg:scale-[250%]"
+            height={550}
           />
           <img src={zx9SmMenu} alt="ZX9 SPEAKER" className="w-44 md:hidden" />
           <img
             src={zx9MdMenu}
             alt="ZX9 SPEAKER"
             className="hidden  w-52 md:block lg:hidden "
+            height={550}
           />
           <img
             src={zx9LgMenu}
             alt="ZX9 SPEAKER"
             className="hidden w-96 translate-y-[15%] lg:block"
+            height={900}
           />
         </div>
 
@@ -72,12 +75,14 @@ const AdProducts = () => {
           src={zx7Sm}
           alt="ZX7 speaker"
           className="absolute max-h-[550px]  w-full rounded-lg object-cover md:hidden"
+          height={500}
         />
 
         <img
           src={zx7}
           alt="ZX7 speaker"
           className="absolute hidden h-full w-full rounded-lg object-cover md:block"
+          height={320}
         />
 
         <div className=" z-10 ml-8 flex flex-col gap-8 lg:ml-32">
@@ -94,11 +99,13 @@ const AdProducts = () => {
           src={yx1Md}
           alt="yx1 earphones"
           className=" hidden w-[50%] md:block lg:hidden"
+          height={270}
         />
         <img
           src={yx1Lg}
           alt="yx1 earphones"
           className="hidden w-full lg:block"
+          height={430}
         />
         <div className="flex w-full flex-col items-center gap-8 rounded-lg bg-grey-lighter p-6 md:justify-center">
           <h2 className="text-3xl font-bold uppercase">yx1 earphones</h2>

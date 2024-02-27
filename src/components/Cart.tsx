@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { motion } from "framer-motion";
 import ButtonGold from "../ui/ButtonGold";
 import AmountChanger from "../ui/AmountChanger";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { PiShoppingCart } from "react-icons/pi";
 import { useNavigate } from "react-router";
@@ -19,6 +19,11 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const data = useAppSelector((state) => state.storeSlice.data);
+  const isCartActive = useAppSelector(
+    (state) => state.activePageSlice.cartActive,
+  );
+
+  const cartRef = useRef<HTMLDivElement>(null);
 
   const groupAmount = data.reduce((result, item) => {
     if (!result[item.name]) {
@@ -76,6 +81,25 @@ const Cart = () => {
     acc += item.price * item.amount;
     return acc;
   }, 0);
+  console.log(isCartActive);
+  useEffect(() => {
+    const handler = (event: any) => {
+      if (isCartActive) {
+        if (!cartRef.current) return;
+        else if (!cartRef.current.contains(event.target) && isCartActive) {
+          dispatch({ type: "activePage/cartActive", payload: false });
+          event.stopPropagation();
+        }
+      }
+      return;
+    };
+
+    document.addEventListener("click", handler, true);
+
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, [isCartActive]);
 
   return (
     <motion.div
@@ -84,6 +108,7 @@ const Cart = () => {
       transition={{ duration: 0.5 }}
       exit={{ x: "100%", opacity: 0 }}
       className="absolute right-[5%] top-[120px] z-20  max-h-[480px]  w-80    rounded-lg bg-white p-4 text-black md:w-96"
+      ref={cartRef}
     >
       {finalData.length === 0 ? (
         <div className="flex  items-center justify-between gap-6">

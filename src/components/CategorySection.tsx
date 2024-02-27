@@ -20,6 +20,7 @@ const CategorySection = () => {
                 src={headphonesMenu}
                 className="h-32 object-contain "
                 alt="Headphones image"
+                height={130}
               />
               <div className="flex flex-col items-center gap-4">
                 <h3 className="font-bold uppercase tracking-wider">
@@ -44,6 +45,7 @@ const CategorySection = () => {
                 src={speakersMenu}
                 className="h-32 object-contain "
                 alt="Speakers image"
+                height={130}
               />
               <div className="flex flex-col items-center gap-4">
                 <h3 className="font-bold uppercase tracking-wider">speakers</h3>
@@ -66,6 +68,7 @@ const CategorySection = () => {
                 src={earphonesMenu}
                 className="h-32 object-contain "
                 alt="Earphones image"
+                height={130}
               />
               <div className="flex flex-col items-center gap-4">
                 <h3 className="font-bold uppercase tracking-wider">

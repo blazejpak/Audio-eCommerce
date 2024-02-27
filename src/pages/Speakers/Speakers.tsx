@@ -39,18 +39,21 @@ const Speakers = () => {
             alt="ZX9
 SPEAKER"
             className="rounded-lg md:hidden"
+            height={650}
           />
           <img
             src={zx9Md}
             alt="ZX9
 SPEAKER"
             className="hidden rounded-lg md:block lg:hidden"
+            height={500}
           />
           <img
             src={zx9Lg}
             alt="ZX9
 SPEAKER"
             className="hidden w-[50%] rounded-lg lg:block"
+            height={400}
           />
           <div className="flex flex-col items-center  gap-6 md:w-[570px]">
             <h3 className="text-sm uppercase tracking-[10px] text-gold-dark">
@@ -75,18 +78,21 @@ SPEAKER"
             alt="ZX7
 SPEAKER"
             className="rounded-lg md:hidden"
+            height={650}
           />
           <img
             src={zx7Md}
             alt="ZX7
 SPEAKER"
             className="hidden rounded-lg md:block lg:hidden"
+            height={500}
           />
           <img
             src={zx7Lg}
             alt="ZX7
 SPEAKER"
             className="hidden w-[50%] rounded-lg lg:block"
+            height={400}
           />
           <div className="flex flex-col items-center  gap-6 md:w-[570px]">
             <h2 className="text-center text-3xl font-bold uppercase">

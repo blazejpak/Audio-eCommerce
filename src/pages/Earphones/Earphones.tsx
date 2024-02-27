@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 const Earphones = () => {
   const navigate = useNavigate();
 
-  const buttonNavigateYx1Handler = ():void => {
+  const buttonNavigateYx1Handler = (): void => {
     navigate("/earphones/yx1-earphones");
     window.scrollTo({ top: 0, behavior: "instant" });
   };
@@ -30,18 +30,21 @@ const Earphones = () => {
             alt="YX1 WIRELESS
 EARPHONES"
             className="rounded-lg md:hidden"
+            height={650}
           />
           <img
             src={yx9Md}
             alt="YX1 WIRELESS
 EARPHONES"
             className="hidden rounded-lg md:block lg:hidden"
+            height={500}
           />
           <img
             src={yx9Lg}
             alt="YX1 WIRELESS
 EARPHONES"
             className="hidden w-[50%] rounded-lg lg:block"
+            height={400}
           />
           <div className="flex flex-col items-center  gap-6 md:w-[570px]">
             <h3 className="text-sm uppercase tracking-[10px] text-gold-dark">

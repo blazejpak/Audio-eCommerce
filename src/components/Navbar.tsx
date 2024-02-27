@@ -28,11 +28,12 @@ const Navbar = () => {
 
   const menuHandler = (): void => {
     dispatch({ type: "activePage/menuActive" });
-    if (isCartActive) dispatch({ type: "activePage/cartActive" });
+    if (isCartActive)
+      dispatch({ type: "activePage/cartActive", payload: false });
   };
 
   const cartHandler = (): void => {
-    dispatch({ type: "activePage/cartActive" });
+    dispatch({ type: "activePage/cartActive", payload: true });
 
     if (isMenuActive) dispatch({ type: "activePage/menuActive" });
   };
@@ -40,10 +41,11 @@ const Navbar = () => {
   useEffect(() => {
     const changedLocation = (): void => {
       if (isMenuActive) dispatch({ type: "activePage/menuActive" });
-      else if (isCartActive) dispatch({ type: "activePage/cartActive" });
+      else if (isCartActive)
+        dispatch({ type: "activePage/cartActive", payload: false });
       else if (isMenuActive && isCartActive) {
         dispatch({ type: "activePage/menuActive" });
-        dispatch({ type: "activePage/cartActive" });
+        dispatch({ type: "activePage/cartActive", payload: false });
       } else return;
     };
     changedLocation();
